@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import { validate } from 'joi';
 
 export default class Collection {
   constructor(name, schema) {
@@ -14,7 +14,7 @@ export default class Collection {
   save(data) {
     return new Promise((resolve, reject) => {
       // validate the incoming data to match the schema
-      Joi.validate(data, this.schema)
+      validate(data, this.schema)
         .then((res) => {
           // set some meta information for every saved record
           res.id = this.index.toString();
