@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/Musigwa/SendIT-API.svg?branch=parcels-management)](https://travis-ci.org/Musigwa/SendIT-API)
+[![Coverage Status](https://coveralls.io/repos/github/Musigwa/SendIT-API/badge.svg?branch=parcels-management)](https://coveralls.io/github/Musigwa/SendIT-API?branch=parcels-management)
+[![Maintainability](https://api.codeclimate.com/v1/badges/eb485abfa6f431f0033e/maintainability)](https://codeclimate.com/github/Musigwa/SendIT-API/maintainability)
+
 # SendIT
 
 SendIT is a courier service that helps users deliver parcels to different destinations. It provides courier quotes based on weight categories.
