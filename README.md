@@ -2,20 +2,7 @@
 
 SendIT is a courier service that helps users deliver parcels to different destinations. It provides courier quotes based on weight categories.
 
-## How to get started (No extra installations required(!)
-
-Simply clone/download or folk this repository and just open it with your favolite editor. and then boom. That's it.
-
-## How to start debugging this project
-
-After opening the project with the editor, you can double click or right click to the index.html to open it with the browser of your choice.
-You'll get to the welcome page of this application and then explore its services by playing around with it.
-
-## Can i maintain or build my own from this tempelate(?)
-
-Yes you can use this web tempelate to build your own. Once cloned/downloaded or folked, feel free to open any of the files contained in either folders and start editing the codes to see the changes.
-
-# SendIT-API
+## SendIT-API
 
 SendIT-API is a courier service delivery nodejs/express API server that helps my sendIT https://github.com/Musigwa/SendIT web application and/or any other third-party applications to get all the RESTFUL functionalities of this service.
 
