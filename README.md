@@ -6,6 +6,8 @@ SendIT is a courier service that helps users deliver parcels to different destin
 
 SendIT-API is a courier service delivery nodejs/express API server that helps my sendIT https://github.com/Musigwa/SendIT web application and/or any other third-party applications to get all the RESTFUL functionalities of this service.
 
+## The UI template(web pages) is here: https://musigwa.github.io/SendIT-API/
+
 ## Here is the Heroku deployment link of this server: https://sendit-api.herokuapp.com/api/v1
 
 ## How to get started
