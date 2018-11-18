@@ -19,6 +19,8 @@ Yes you can use this web tempelate to build your own. Once cloned/downloaded or 
 
 SendIT-API is a courier service delivery nodejs/express API server that helps my sendIT https://github.com/Musigwa/SendIT web application and/or any other third-party applications to get all the RESTFUL functionalities of this service.
 
+## Here is the Heroku deployment link of this server: https://sendit-api.herokuapp.com/api/v1
+
 ## How to get started
 
 1. Simply clone/download or folk this repository and just open it with your favolite editor.
