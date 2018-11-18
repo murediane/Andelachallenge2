@@ -30,6 +30,33 @@ const getParcel = (req, res) => {
     .catch(err => res.status(400).json({ error: err }));
 };
 
+// /*********** CANCEL THE PARCEL DELIVERY ORDER ******************************/
+
+const cancelOrder = (req, res) => {
+  const { id } = req.params;
+  // look up in the collection to find the matching objectith the give ID
+  Parcel.findById(id)
+    .then((parcel) => {
+      /**
+       * check for its status if it's delivered, return an error. otherwise cancel it.
+       */
+      const { status } = parcel;
+      if (status.toLowerCase() === 'delivered') {
+        return res.status(403).json({
+          error: {
+            name: 'permissionError',
+            message: "can't cancel delivered order",
+          },
+        });
+      }
+      // set the parcel status to cancelled
+      Parcel.findByIdAndUpdate(id, { status: 'cancelled' })
+        .then(parcels => res.status(200).json({ error: null, parcels }))
+        .catch(err => res.status(400).json({ error: err }));
+    })
+    .catch(err => res.status(400).json({ error: err }));
+};
+
 // /************************ END OF PARCELS APIs ******************************/
 
-export { createParcel, getAll, getParcel };
+export { createParcel, getAll, getParcel,cancelOrder };

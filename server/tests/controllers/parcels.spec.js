@@ -330,4 +330,76 @@ describe('Test all API methods related with parcels', () => {
       done();
     });
   });
+
+  /**
+   * PUT parcels/<parcelId>/cancel [returns all parcel delivery orders with
+   * cancelled status of the order matched by the given ID]
+   */
+
+  describe('/PUT cancel the parcel delivery order', () => {
+    it('it should return an object with error=null property STATUS [200]', (done) => {
+      Parcel.save(newParcel) // must save the verified data to match the schema
+        .then(() => {
+          chai
+            .request(server)
+            .put(`${baseUrl}/parcels/${newParcel.sender}/cancel`)
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.should.be.a('object');
+              res.body.should.have.property(
+                'error',
+                null,
+                'expected error to be null',
+              );
+              res.body.should.have.property('parcels').be.a('array');
+              // .should.have.property(
+              //   'status',
+              //   'cancelled',
+              //   'expected parcel status to be [cancelled]',
+              // );
+            });
+          done();
+        });
+    });
+    it('if the id is not found, it should return an object with error property STATUS [400]', (done) => {
+      Parcel.save(newParcel) // must save the verified data to match the schema
+        .then(() => {
+          chai
+            .request(server)
+            .put(`${baseUrl}/parcels/1ddsKJBKdbj354/cancel`)
+            .end((err, res) => {
+              res.should.have.status(400);
+              res.body.should.be.a('object');
+              res.body.should.have
+                .property('error')
+                .be.a('object', 'expected error to be an object');
+              res.body.error.should.have.property('message');
+            });
+          done();
+        });
+    });
+    it("[delivered] orders can't be cancelled. it should return an object with error, STATUS [403]", (done) => {
+      Parcel.save({ ...newParcel, status: 'delivered' }).then(() => {
+        chai
+          .request(server)
+          .put(`${baseUrl}/parcels/${newParcel.sender}/cancel`)
+          .end((err, res) => {
+            res.should.have.status(403);
+            res.body.should.be.a('object');
+            res.body.should.have.property('error');
+            res.body.error.should.have.property(
+              'message',
+              "can't cancel delivered order",
+              "expected error message to be [can't cancel delivered order]",
+            );
+            res.body.error.should.have.property(
+              'name',
+              'permissionError',
+              'expected error name to be permissionError',
+            );
+          });
+        done();
+      });
+    });
+  });
 });
