@@ -402,4 +402,28 @@ describe('Test all API methods related with parcels', () => {
       });
     });
   });
+
+  // GET users/<userId>/parcels [returns all parcel delivery orders with the matched given userId]
+
+  describe("/GET all the parcel user's delivery orders", () => {
+    it('it should return an object with error=null property STATUS [200]', (done) => {
+      Parcel.save(newParcel) // must save the verified data to match the schema
+        .then(() => {
+          chai
+            .request(server)
+            .get(`${baseUrl}/users/${newParcel.sender}/parcels`)
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.should.be.a('object');
+              res.body.should.have.property(
+                'error',
+                null,
+                'expected error to be null',
+              );
+              res.body.should.have.property('parcels').be.a('array');
+            });
+          done();
+        });
+    });
+  });
 });
