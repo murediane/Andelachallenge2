@@ -256,4 +256,78 @@ describe('Test all API methods related with parcels', () => {
       done();
     });
   });
+
+  // GET parcels [returns all parcel deliv orders created by the users]
+
+  describe('/GET parcel delivery orders', () => {
+    it('it should return an object with error=null, and array of parcels,STATUS [200]', (done) => {
+      Parcel.save(newParcel) // must save the verified data to match the schema
+        .then(() => {
+          chai
+            .request(server)
+            .get(`${baseUrl}/parcels`)
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.should.be.a('object');
+              res.body.should.have.property('parcels');
+              res.body.should.have.property(
+                'error',
+                null,
+                'expected error to be null',
+              );
+              res.body.parcels.should.be
+                .a('array', 'expected parcels to be an array')
+                .length(1);
+            });
+          done();
+        });
+    });
+    it('it should return an object with an empty array parcels, STATUS [204]', (done) => {
+      chai
+        .request(server)
+        .get(`${baseUrl}/parcels`)
+        .end((err, res) => {
+          res.body.should.be.a('object');
+          res.should.have.status(204);
+        });
+      done();
+    });
+  });
+  // GET parcels/<parcelid> [returns a specific parcel deliv order by its ID]
+
+  describe('/GET a specific parcel delivery order', () => {
+    it('it should return an object with error=null and parcel property, STATUS [200]', (done) => {
+      Parcel.save(newParcel) // must save the verified data to match the schema
+        .then(() => {
+          chai
+            .request(server)
+            .get(`${baseUrl}/parcels/${newParcel.sender}`)
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.should.be.a('object');
+              res.body.should.have
+                .property('parcel')
+                .be.a('object', 'expected parcel to be an object');
+              res.body.should.have.property(
+                'error',
+                null,
+                'expected error to be null',
+              );
+            });
+          done();
+        });
+    });
+    it('if the given ID is not found, it should return an object with error property,STATUS [400]', (done) => {
+      chai
+        .request(server)
+        .get(`${baseUrl}/parcels/${newParcel.sender}`)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('error');
+          res.body.error.should.have.property('message');
+        });
+      done();
+    });
+  });
 });
