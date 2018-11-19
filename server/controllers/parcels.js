@@ -59,4 +59,6 @@ const cancelOrder = (req, res) => {
 
 // /************************ END OF PARCELS APIs ******************************/
 
-export { createParcel, getAll, getParcel,cancelOrder };
+export {
+  createParcel, getAll, getParcel, cancelOrder,
+};
