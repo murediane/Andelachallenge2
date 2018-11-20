@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/murediane/Andelachallenge2.svg?branch=ft-feature-challenge2-162087089)](https://travis-ci.org/murediane/Andelachallenge2)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4dec20e55b153256a3ce/maintainability)](https://codeclimate.com/github/murediane/Andelachallenge2/maintainability)
-[![Coverage Status](https://coveralls.io/repos/github/murediane/Andelachallenge2/badge.svg?branch=develop)](https://coveralls.io/github/murediane/Andelachallenge2?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/murediane/Andelachallenge2/badge.svg?branch=ft-feature-challenge2-162087089)](https://coveralls.io/github/murediane/Andelachallenge2?branch=ft-feature-challenge2-162087089)
 
 # NODEJS RESTful-API server
 
