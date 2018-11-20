@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Musigwa/SendIT.svg?branch=ft-fetch-user-orders-endpoints-161747510)](https://travis-ci.org/Musigwa/SendIT)
+[![Coverage Status](https://coveralls.io/repos/github/Musigwa/SendIT/badge.svg?branch=develop)](https://coveralls.io/github/Musigwa/SendIT?branch=develop)
 
 # SendIT
 
