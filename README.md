@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Musigwa/SendIT.svg?branch=ft-fetch-user-orders-endpoints-161747510)](https://travis-ci.org/Musigwa/SendIT)
+
 # SendIT
 
 SendIT is a courier service that helps users deliver parcels to different destinations. It provides courier quotes based on weight categories.
@@ -18,6 +20,8 @@ SendIT-API is a courier service delivery nodejs/express API server that helps my
 ## Here is also the Heroku link of the server
 
 => https://sendit-api.herokuapp.com/api/v1
+
+## Here is the Heroku deployment link of this server: https://sendit-api.herokuapp.com/api/v1
 
 ## How to get started
 
