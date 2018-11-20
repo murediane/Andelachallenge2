@@ -21,8 +21,6 @@ SendIT-API is a courier service delivery nodejs/express API server that helps my
 
 => https://sendit-api.herokuapp.com/api/v1
 
-## Here is the Heroku deployment link of this server: https://sendit-api.herokuapp.com/api/v1
-
 ## How to get started
 
 1. Simply clone/download or folk this repository and just open it with your favolite editor.
