@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # NODEJS RESTful-API server
 
 This is the nodejs express server boilerplate to help you setup your project structure to take off as fast as possible.
@@ -32,6 +31,3 @@ Or if you want to contribute to this repo, please pull the request to build the 
 Let me know what's blocking you so that i can provide the quick help to get started
 
 ### Every question is welcome
-=======
-# Andelachallenge2
->>>>>>> e2ad8446303a893ab7d0ed7143d4256446b941dc
