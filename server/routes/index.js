@@ -1,8 +1,9 @@
 import express, { Router } from 'express';
 import parcelsRoutes from './parcels';
 import usersRoutes from './users';
+import checkAuth from '../helpers/checkAuth';
 
-const all = Router();
+const routes = Router();
 
 /** ********* API ENTRYPOINT **************************** */
 
@@ -17,6 +18,9 @@ const uploads = ('/uploads', express.static('uploads'));
 
 /** ********** ALL ENDPOINTS *************************** */
 
-all.use(entryPoint, parcelsRoutes, usersRoutes, uploads);
+// Unprotected routes
+routes.use(entryPoint);
+// Protected routes
+routes.use(checkAuth, parcelsRoutes, usersRoutes, uploads);
 
-export default all;
+export default routes;
