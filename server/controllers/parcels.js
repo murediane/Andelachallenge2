@@ -29,12 +29,12 @@ const createParcel = (req, res) => {
 const cancelParcel = (req, res) => {
   const { id } = req.params;
   const parcel = parcels.find(p => p.id === parseInt(id));
-  if (!parcel) return res.status(400).send({ message: 'invalid id' });
-  const { error } = validateparcel(req.body);
-  if (error) {
-    res.status(400).send(error.details[0].message);
-    return;
-  }
+  if (!parcel) return res.status(200).send({ message: 'invalid id' });
+  // const { error } = validateparcel(req.body);
+  //if (error) {
+  // res.status(400).send(error.details[0].message);
+  //return;
+  // }
   parcel.status = 'cancel';
   return res.status(200).send(parcel);
 };
