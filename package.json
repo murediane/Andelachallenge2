@@ -1,17 +1,17 @@
 {
-  "name": "sendit",
+  "name": "appname",
   "version": "1.0.0",
   "description": "add the project description here",
   "main": "./server/index.js",
-  "author": "Murekatete Diane",
+  "author": "Murekatete diane",
   "license": "MIT",
   "scripts": {
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "test": " NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --timeout 25000 --require babel-register {tests,tests/**}/*.spec.js --exit || true",
-    "server": " cross-env NODE_ENV=dev nodemon --exec babel-node ./server/index.js"
+    "test": "nyc --reporter=text --reporter=lcov mocha --timeout 25000 --require babel-register {tests,tests/**}/*.spec.js --exit",
+    "server": "nodemon --exec babel-node ./server/index.js"
   },
   "engines": {
-    "node": "v8.12.0"
+    "node": "10.13.0"
   },
   "repository": {
     "type": "git",

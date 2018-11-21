@@ -1,4 +1,7 @@
-<<<<<<< HEAD
+[![Build Status](https://travis-ci.org/murediane/Andelachallenge2.svg?branch=ft-feature-challenge2-162087089)](https://travis-ci.org/murediane/Andelachallenge2)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4dec20e55b153256a3ce/maintainability)](https://codeclimate.com/github/murediane/Andelachallenge2/maintainability)
+[![Coverage Status](https://coveralls.io/repos/github/murediane/Andelachallenge2/badge.svg?branch=ft-feature-challenge2-162087089)](https://coveralls.io/github/murediane/Andelachallenge2?branch=ft-feature-challenge2-162087089)
+
 # NODEJS RESTful-API server
 
 This is the nodejs express server boilerplate to help you setup your project structure to take off as fast as possible.
@@ -32,6 +35,3 @@ Or if you want to contribute to this repo, please pull the request to build the 
 Let me know what's blocking you so that i can provide the quick help to get started
 
 ### Every question is welcome
-=======
-# Andelachallenge2
->>>>>>> e2ad8446303a893ab7d0ed7143d4256446b941dc

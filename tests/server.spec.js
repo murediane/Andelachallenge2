@@ -11,8 +11,8 @@ chai.use(chaiHTTP);
 // Tests the entrypoint of the server
 
 describe('/GET server', () => {
-  it("it should return an object with property message:'welcome'", (done) => {
-    const exp = { msg: 'welcome' };
+  it("it should return an object with property message:'access granted'", done => {
+    const exp = { msg: 'ACCESS GRANTED' };
     chai
       .request(server)
       .get(constants.baseUrl)
