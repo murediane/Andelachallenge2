@@ -15,6 +15,39 @@ const getParcel = (req, res) => {
 
 // the create a new Parcel ****/
 const createParcel = (req, res) => {
+  const { error } = validateparcel(req.body);
+  if (error) {
+    res.status(400).send(error.details[0].message);
+    return;
+  }
+  const parcel = { id: parcels.length + 1, ...req.body };
+  parcels.push(parcel);
+  return res.send(parcel);
+};
+
+// the cancel the specific Parcel ****/
+const cancelParcel = (req, res) => {
+  const { id } = req.params;
+  const parcel = parcels.find(p => p.id === parseInt(id));
+  if (!parcel) return res.status(400).send({ message: 'invalid id' });
+  const { error } = validateparcel(req.body);
+  if (error) {
+    res.status(400).send(error.details[0].message);
+    return;
+  }
+  parcel.status = 'cancel';
+  return res.status(200).send(parcel);
+};
+
+// get order by user id endpoint
+const userParcels = (req, res) => {
+  const { id, usr_id } = req.params;
+  const parcel = parcels.find(p => p.usr_id === parseInt(usr_id));
+  return parcel
+    ? res.send(parcel)
+    : res.status(400).send({ message: 'invalid user_id' });
+};
+const validateparcel = parcel => {
   const schema = {
     usr_id: Joi.number()
       .min(1)
@@ -47,33 +80,7 @@ const createParcel = (req, res) => {
       .min(4)
       .required(),
   };
-  const result = Joi.validate(req.body, schema);
-
-  if (result.error) {
-    res.status(400).send(result.error.details[0].message);
-    return;
-  }
-  const parcel = { id: parcels.length + 1, ...req.body };
-  parcels.push(parcel);
-  return res.send(parcel);
-};
-
-// the cancel the specific Parcel ****/
-const cancelParcel = (req, res) => {
-  const { id } = req.params;
-  const parcel = parcels.find(p => p.id === parseInt(id));
-  if (!parcel) return res.status(400).send({ message: 'invalid id' });
-  parcel.status = 'cancel';
-  return res.status(200).send(parcel);
-};
-
-// get order by user id endpoint
-const userParcels = (req, res) => {
-  const { id, usr_id } = req.params;
-  const parcel = parcels.find(p => p.usr_id === parseInt(usr_id));
-  return parcel
-    ? res.send(parcel)
-    : res.status(400).send({ message: 'invalid user_id' });
+  return Joi.validate(parcel, schema);
 };
 
 // export them all here
