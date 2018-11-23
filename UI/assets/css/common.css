@@ -284,7 +284,7 @@ a {
   /* font-family: Cormorant Garamond; */
   font-size: 20px;
   font-weight: bold;
-  text-transform: capitalize;
+  text-transform: capitalize;text-align: 
   font-style: Helvetica;
   text-align: center;
   text-shadow: 2px 2px 8px #111;
@@ -373,14 +373,14 @@ a {
 /* Tabular data components' styles  */
 
 .data-table {
-  overflow-x: auto;
+  overflow-x: scroll;
 }
 
 .data-table table {
-  border-collapse: collapse;
+  border-collapse: separate;
   width: 100%;
   color: gray;
-  border: 1px solid #ddd;
+  border: 1px solid rgb(12, 11, 11);
   font-size: 100%;
   font-style: Helvetica;
   font-weight: 200;
@@ -411,17 +411,17 @@ a {
 }
 
 .data-table tr:hover .hover {
-  display: block;
+  display: flex;
 }
 
 .data-table td img {
-  cursor: pointer;
+  cursor: default;
   width: 50px;
   height: 50px;
 }
 
 .hover {
-  display: none;
+  display: flow-root;
 }
 
 /* Floating action button */
@@ -429,17 +429,17 @@ a {
 .fab {
   padding: 0.1%;
   border-radius: 40px;
-  display: flex;
+  display: block;
   justify-content: center;
   z-index: 1;
   align-items: center;
   position: fixed;
-  right: 90px;
-  /*bottom: 10px;*/
-  top: 2px;
+  left: 25px;
+  bottom: 10px;
+  /*top: 200px;
   animation-name: fab;
   animation-duration: 20s;
-  animation-iteration-count: infinite;
+  animation-iteration-count: infinite;*/
 }
 
 .fab:hover {
@@ -447,7 +447,7 @@ a {
 }
 
 .fab:hover p {
-  display: flex;
+  display: block;
 }
 
 .fab img {
@@ -458,7 +458,7 @@ a {
 .fab p {
   font-family: Helvetica;
   font-weight: 900;
-  display: flex;
+  display: block;
   font-size: 18px;
   color: var(--text-color);
   font-style: italic;
