@@ -29,7 +29,7 @@ router.put(`${entry}/:id/cancel`, cancelParcel);
 
 //  GET ALL USER PARCELS
 
-router.get(`/users/:usr_id${entry}`, userParcels);
+router.get(`/users/:userId${entry}`, userParcels);
 
 // Export  router
 
