@@ -25,7 +25,6 @@ parcels.get(`${entry}/:id`, getParcel);
 // /*********** CANCEL THE PARCEL DELIVERY ORDER ******************************/
 
 parcels.put(`${entry}/:id/cancel`, cancelOrder);
-
 // /************************ END OF PARCELS APIs ******************************/
 
 export default parcels;
