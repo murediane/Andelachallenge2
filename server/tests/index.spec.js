@@ -10,7 +10,7 @@ chai.use(chaiHTTP);
 // Tests the entrypoint of the server
 
 describe('/GET server', () => {
-  it("it should return an object with property message:'welcome'", (done) => {
+  it("it should return an object with property message:'welcome'", done => {
     const exp = { msg: 'welcome' };
     chai
       .request(server)
@@ -25,7 +25,7 @@ describe('/GET server', () => {
         done();
       });
   });
-  it('it should return an object with property error', (done) => {
+  it('it should return an object with property error', done => {
     chai
       .request(server)
       .get(`${baseUrl}/unknown`)
@@ -36,7 +36,7 @@ describe('/GET server', () => {
         res.body.error.should.have.property(
           'name',
           'UrlError',
-          'expected error name to be UrlError',
+          'expected error name to be UrlError'
         );
         res.body.error.should.have.property('message').contains('invalid url');
         done();
