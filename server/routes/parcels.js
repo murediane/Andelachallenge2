@@ -4,13 +4,13 @@ import {
   createParcel,
   getAll,
   getParcel,
-  cancelOrder,
+  cancelOrder
 } from '../controllers/parcels';
 
 const parcels = Router();
 const entry = '/parcels';
 
-// /***************** CREATE THE PARCEL ***************************************/
+// /***************** CREATE THE PARCEL ****************************************/
 
 parcels.post(`${entry}`, createParcel);
 

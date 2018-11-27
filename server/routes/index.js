@@ -1,6 +1,7 @@
 import express, { Router } from 'express';
 import parcelsRoutes from './parcels';
 import usersRoutes from './users';
+import auth from './auth';
 
 const all = Router();
 
@@ -17,6 +18,6 @@ const uploads = ('/uploads', express.static('uploads'));
 
 /** ********** ALL ENDPOINTS *************************** */
 
-all.use(entryPoint, parcelsRoutes, usersRoutes, uploads);
+all.use(entryPoint, auth, parcelsRoutes, usersRoutes, uploads);
 
 export default all;

@@ -19,7 +19,7 @@ describe('Test all API methods related with parcels', () => {
   // POST parcels [returns all created parcel delivery orders
 
   describe('/POST create a new parcel delivery order', () => {
-    it('it should return an object with error=null property, STATUS [201]', (done) => {
+    it('it should return an object with error=null property, STATUS [201]', done => {
       chai
         .request(server)
         .post(`${baseUrl}/parcels`)
@@ -35,7 +35,7 @@ describe('Test all API methods related with parcels', () => {
         });
       done();
     });
-    it('the sender of the order is required, it should return an object with error property, STATUS [400]', (done) => {
+    it('the sender of the order is required, it should return an object with error property, STATUS [400]', done => {
       const { sender, ...rest } = newParcel;
       chai
         .request(server)
@@ -50,7 +50,7 @@ describe('Test all API methods related with parcels', () => {
         });
       done();
     });
-    it('the sender of the order is a string of atleast 1 char, it should return an object with error property STATUS [400]', (done) => {
+    it('the sender of the order is a string of atleast 1 char, it should return an object with error property STATUS [400]', done => {
       const data = { ...newParcel, sender: '' };
       chai
         .request(server)
@@ -64,12 +64,12 @@ describe('Test all API methods related with parcels', () => {
           res.body.error.should.have.property(
             'message',
             '"sender" is not allowed to be empty',
-            'expected error message include [not allowed to be empty]',
+            'expected error message include [not allowed to be empty]'
           );
         });
       done();
     });
-    it('the recipient of the order is required, it should return an object with error property STATUS [400]', (done) => {
+    it('the recipient of the order is required, it should return an object with error property STATUS [400]', done => {
       const { recipient, ...rest } = newParcel;
       chai
         .request(server)
@@ -84,7 +84,7 @@ describe('Test all API methods related with parcels', () => {
         });
       done();
     });
-    it('the recipient must be an object of atleast phone property, it should return an object with error property STATUS [400]', (done) => {
+    it('the recipient must be an object of atleast phone property, it should return an object with error property STATUS [400]', done => {
       const data = { ...newParcel, recipient: {} };
       chai
         .request(server)
@@ -101,7 +101,7 @@ describe('Test all API methods related with parcels', () => {
         });
       done();
     });
-    it("the recipient's phone number must be an object of atleast 10 chars, it should return an object with error property STATUS [400]", (done) => {
+    it("the recipient's phone number must be an object of atleast 10 chars, it should return an object with error property STATUS [400]", done => {
       const data = { ...newParcel, recipient: { phone: '0789' } };
       chai
         .request(server)
@@ -116,12 +116,12 @@ describe('Test all API methods related with parcels', () => {
           res.body.error.should.have.property('name', 'ValidationError');
           res.body.error.should.have.property(
             'message',
-            '"phone" length must be at least 10 characters long',
+            '"phone" length must be at least 10 characters long'
           );
         });
       done();
     });
-    it('the pick up location [origin] of the order must be provided, it should return an object with error property STATUS [400]', (done) => {
+    it('the pick up location [origin] of the order must be provided, it should return an object with error property STATUS [400]', done => {
       const { origin, ...rest } = newParcel;
       chai
         .request(server)
@@ -138,7 +138,7 @@ describe('Test all API methods related with parcels', () => {
         });
       done();
     });
-    it('the pick up location [origin] of the order must be a string of atleast one char, it should return an object with error property STATUS [400]', (done) => {
+    it('the pick up location [origin] of the order must be a string of atleast one char, it should return an object with error property STATUS [400]', done => {
       const data = { ...newParcel, origin: '' };
 
       chai
@@ -154,12 +154,12 @@ describe('Test all API methods related with parcels', () => {
           res.body.error.should.have.property('name', 'ValidationError');
           res.body.error.should.have.property(
             'message',
-            '"origin" is not allowed to be empty',
+            '"origin" is not allowed to be empty'
           );
         });
       done();
     });
-    it('the [destination] of the order must be provided, it should return an object with error property STATUS [400]', (done) => {
+    it('the [destination] of the order must be provided, it should return an object with error property STATUS [400]', done => {
       const { destination, ...rest } = newParcel;
       chai
         .request(server)
@@ -174,12 +174,12 @@ describe('Test all API methods related with parcels', () => {
           res.body.error.should.have.property('name', 'ValidationError');
           res.body.error.should.have.property(
             'message',
-            '"destination" is required',
+            '"destination" is required'
           );
         });
       done();
     });
-    it('the [destination] of the order must be a string of atleast one char, it should return an object with error property STATUS [400]', (done) => {
+    it('the [destination] of the order must be a string of atleast one char, it should return an object with error property STATUS [400]', done => {
       const data = { ...newParcel, destination: '' };
 
       chai
@@ -195,12 +195,12 @@ describe('Test all API methods related with parcels', () => {
           res.body.error.should.have.property('name', 'ValidationError');
           res.body.error.should.have.property(
             'message',
-            '"destination" is not allowed to be empty',
+            '"destination" is not allowed to be empty'
           );
         });
       done();
     });
-    it('the [weight] of the parcel must be provided, it should return an object with error property STATUS [400]', (done) => {
+    it('the [weight] of the parcel must be provided, it should return an object with error property STATUS [400]', done => {
       const { weight, ...rest } = newParcel;
       chai
         .request(server)
@@ -217,7 +217,7 @@ describe('Test all API methods related with parcels', () => {
         });
       done();
     });
-    it('the [weight] of the parcel must be a nummber >= [one], it should return an object with error property STATUS [400]', (done) => {
+    it('the [weight] of the parcel must be a nummber >= [one], it should return an object with error property STATUS [400]', done => {
       const data = { ...newParcel, weight: 0 };
 
       chai
@@ -233,12 +233,12 @@ describe('Test all API methods related with parcels', () => {
           res.body.error.should.have.property('name', 'ValidationError');
           res.body.error.should.have.property(
             'message',
-            '"weight" must be larger than or equal to 1',
+            '"weight" must be larger than or equal to 1'
           );
         });
       done();
     });
-    it('it should decline the order with properties not matching the order schema, it should return an object with error property STATUS [400]', (done) => {
+    it('it should decline the order with properties not matching the order schema, it should return an object with error property STATUS [400]', done => {
       const data = { ...newParcel, limit: 0 };
       chai
         .request(server)
@@ -260,7 +260,7 @@ describe('Test all API methods related with parcels', () => {
   // GET parcels [returns all parcel deliv orders created by the users]
 
   describe('/GET parcel delivery orders', () => {
-    it('it should return an object with error=null, and array of parcels,STATUS [200]', (done) => {
+    it('it should return an object with error=null, and array of parcels,STATUS [200]', done => {
       Parcel.save(newParcel) // must save the verified data to match the schema
         .then(() => {
           chai
@@ -273,7 +273,7 @@ describe('Test all API methods related with parcels', () => {
               res.body.should.have.property(
                 'error',
                 null,
-                'expected error to be null',
+                'expected error to be null'
               );
               res.body.parcels.should.be
                 .a('array', 'expected parcels to be an array')
@@ -282,7 +282,7 @@ describe('Test all API methods related with parcels', () => {
           done();
         });
     });
-    it('it should return an object with an empty array parcels, STATUS [204]', (done) => {
+    it('it should return an object with an empty array parcels, STATUS [204]', done => {
       chai
         .request(server)
         .get(`${baseUrl}/parcels`)
@@ -296,7 +296,7 @@ describe('Test all API methods related with parcels', () => {
   // GET parcels/<parcelid> [returns a specific parcel deliv order by its ID]
 
   describe('/GET a specific parcel delivery order', () => {
-    it('it should return an object with error=null and parcel property, STATUS [200]', (done) => {
+    it('it should return an object with error=null and parcel property, STATUS [200]', done => {
       Parcel.save(newParcel) // must save the verified data to match the schema
         .then(() => {
           chai
@@ -311,13 +311,13 @@ describe('Test all API methods related with parcels', () => {
               res.body.should.have.property(
                 'error',
                 null,
-                'expected error to be null',
+                'expected error to be null'
               );
             });
           done();
         });
     });
-    it('if the given ID is not found, it should return an object with error property,STATUS [400]', (done) => {
+    it('if the given ID is not found, it should return an object with error property,STATUS [400]', done => {
       chai
         .request(server)
         .get(`${baseUrl}/parcels/${newParcel.sender}`)
@@ -337,7 +337,7 @@ describe('Test all API methods related with parcels', () => {
    */
 
   describe('/PUT cancel the parcel delivery order', () => {
-    it('it should return an object with error=null property STATUS [200]', (done) => {
+    it('it should return an object with error=null property STATUS [200]', done => {
       Parcel.save(newParcel) // must save the verified data to match the schema
         .then(() => {
           chai
@@ -349,7 +349,7 @@ describe('Test all API methods related with parcels', () => {
               res.body.should.have.property(
                 'error',
                 null,
-                'expected error to be null',
+                'expected error to be null'
               );
               res.body.should.have.property('parcels').be.a('array');
               // .should.have.property(
@@ -361,7 +361,7 @@ describe('Test all API methods related with parcels', () => {
           done();
         });
     });
-    it('if the id is not found, it should return an object with error property STATUS [400]', (done) => {
+    it('if the id is not found, it should return an object with error property STATUS [400]', done => {
       Parcel.save(newParcel) // must save the verified data to match the schema
         .then(() => {
           chai
@@ -378,7 +378,7 @@ describe('Test all API methods related with parcels', () => {
           done();
         });
     });
-    it("[delivered] orders can't be cancelled. it should return an object with error, STATUS [403]", (done) => {
+    it("[delivered] orders can't be cancelled. it should return an object with error, STATUS [403]", done => {
       Parcel.save({ ...newParcel, status: 'delivered' }).then(() => {
         chai
           .request(server)
@@ -390,12 +390,12 @@ describe('Test all API methods related with parcels', () => {
             res.body.error.should.have.property(
               'message',
               "can't cancel delivered order",
-              "expected error message to be [can't cancel delivered order]",
+              "expected error message to be [can't cancel delivered order]"
             );
             res.body.error.should.have.property(
               'name',
               'permissionError',
-              'expected error name to be permissionError',
+              'expected error name to be permissionError'
             );
           });
         done();
@@ -406,7 +406,7 @@ describe('Test all API methods related with parcels', () => {
   // GET users/<userId>/parcels [returns all parcel delivery orders with the matched given userId]
 
   describe("/GET all the parcel user's delivery orders", () => {
-    it('it should return an object with error=null property STATUS [200]', (done) => {
+    it('it should return an object with error=null property STATUS [200]', done => {
       Parcel.save(newParcel) // must save the verified data to match the schema
         .then(() => {
           chai
@@ -418,7 +418,7 @@ describe('Test all API methods related with parcels', () => {
               res.body.should.have.property(
                 'error',
                 null,
-                'expected error to be null',
+                'expected error to be null'
               );
               res.body.should.have.property('parcels').be.a('array');
             });

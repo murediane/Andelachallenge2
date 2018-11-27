@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "server": "clear && cross-env NODE_ENV=dev nodemon --exec babel-node ./server/index.js",
+    "db": "clear && node --require babel-register ./server/database/prepare.js --exit || true",
     "build": "babel server -d server/dist",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test": "clear && NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --timeout 25000 --require babel-register {server/tests,server/tests/**}/*.spec.js --exit || true"
@@ -16,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Musigwa/SendIT-API"
+    "url": "https://github.com/Musigwa/SendIT"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -25,12 +26,14 @@
     "bcrypt": "^3.0.2",
     "bcrypt-nodejs": "0.0.3",
     "cross-env": "5.2.0",
+    "dotenv": "^6.1.0",
     "express": "4.16.4",
     "joi": "^14.0.4",
     "jsonwebtoken": "8.3.0",
     "morgan": "1.9.1",
     "multer": "1.4.1",
-    "nodemon": "^1.18.6"
+    "nodemon": "^1.18.6",
+    "pg": "^7.6.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
