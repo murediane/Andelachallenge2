@@ -4,7 +4,7 @@ import Parcel from '../models/Parcel';
 
 const createParcel = (req, res) => {
   Parcel.save({ ...req.body })
-    .then(parcels => res.status(201).json({ error: null, parcels }))
+    .then(parcel => res.status(201).json({ error: null, parcel }))
     .catch(err => res.status(400).json({ error: err }));
 };
 
@@ -12,12 +12,10 @@ const createParcel = (req, res) => {
 
 const getAll = (req, res) => {
   const { id: sender = null } = req.params;
-  Parcel.find(sender ? { sender, ...req.query } : { ...req.query })
-    .then((parcels) => {
-      parcels.length
-        ? res.status(200).json({ error: null, parcels })
-        : res.status(204).json({ error: { message: 'no content' } });
-    })
+  Parcel.find(sender ? { sender, ...req.query } : req.query)
+    .then(parcels => (parcels.length
+      ? res.status(200).json({ error: null, parcels })
+      : res.status(204).json({ error: { message: 'no content' } })),)
     .catch(err => res.status(400).json({ error: err }));
 };
 
@@ -26,7 +24,10 @@ const getAll = (req, res) => {
 const getParcel = (req, res) => {
   const { id } = req.params;
   Parcel.findById(id)
-    .then(parcel => res.status(200).json({ error: null, parcel }))
+    .then(parcels => {
+      const [parcel] = parcels;
+      return res.status(200).json({ error: null, parcel });
+    })
     .catch(err => res.status(400).json({ error: err }));
 };
 
@@ -34,25 +35,10 @@ const getParcel = (req, res) => {
 
 const cancelOrder = (req, res) => {
   const { id } = req.params;
-  // look up in the collection to find the matching objectith the give ID
-  Parcel.findById(id)
-    .then((parcel) => {
-      /**
-       * check for its status if it's delivered, return an error. otherwise cancel it.
-       */
-      const { status } = parcel;
-      if (status.toLowerCase() === 'delivered') {
-        return res.status(403).json({
-          error: {
-            name: 'permissionError',
-            message: "can't cancel delivered order",
-          },
-        });
-      }
-      // set the parcel status to cancelled
-      Parcel.findByIdAndUpdate(id, { status: 'cancelled' })
-        .then(parcels => res.status(200).json({ error: null, parcels }))
-        .catch(err => res.status(400).json({ error: err }));
+  Parcel.findByIdAndUpdate(id, { status: 'cancelled' })
+    .then(parcels => {
+      const [parcel] = parcels;
+      return res.status(200).json({ error: null, parcel });
     })
     .catch(err => res.status(400).json({ error: err }));
 };
@@ -60,5 +46,5 @@ const cancelOrder = (req, res) => {
 // /************************ END OF PARCELS APIs ******************************/
 
 export {
-  createParcel, getAll, getParcel, cancelOrder,
+  createParcel, getAll, getParcel, cancelOrder
 };

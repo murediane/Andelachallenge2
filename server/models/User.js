@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import Collection from '../database';
+import Database from '../database';
 
 // the schema definition of the user
 
@@ -16,10 +16,9 @@ const schema = Joi.object().keys({
   password: Joi.string(),
   // .regex(/^[a-zA-Z0-9]{3,30}$/)
   // .required(),
-  avatar: Joi.string().uri(),
-  orders: Joi.array().items(Joi.string()),
+  avatar: Joi.string().uri()
 });
 
 // exporting the model of users
 
-export default new Collection('User', schema);
+export default new Database(schema, 'users');

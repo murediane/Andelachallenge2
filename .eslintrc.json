@@ -12,6 +12,8 @@
   },
   "rules": {
     "consistent-return": "off",
+    "comma-dangle": "off",
+    "no-console": "off",
     "no-plusplus": "off",
     "prefer-promise-reject-errors": "off",
     "no-restricted-syntax": "off",
@@ -19,6 +21,9 @@
     "no-unused-expressions": "off",
     "no-prototype-builtins": "off",
     "no-param-reassign": "off",
-    "no-return-await": "off"
+    "array-callback-return": "off",
+    "no-return-await": "off",
+    "arrow-parens": "off",
+    "class-methods-use-this": "off"
   }
 }
