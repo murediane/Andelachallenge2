@@ -22,16 +22,17 @@ export default class Database {
     return this.pool.connect();
   }
 
-  createCond(args, operator = 'AND') {
+  createKeyValue(args, operator = 'AND', prevIndex = 0) {
     const argsKeys = Object.keys(args);
+    const lastIndex = argsKeys.length - 1;
     const values = [];
     let keys = '';
     argsKeys.map((key, index) => {
       values.push(args[key]);
-      keys += `${key}=$${index + 1}`;
-      if (index !== argsKeys.length - 1) keys += ` ${operator} `;
+      keys += `${key}=$${prevIndex + index + 1}`;
+      if (index !== lastIndex) keys += ` ${operator} `;
     });
-    return { keys, values };
+    return { keys, values, lastIndex: lastIndex + 1 };
   }
 
   // METHOD TO SAVE THE NEW INCOMING DATA //
@@ -75,7 +76,7 @@ export default class Database {
   // METHOD TO SEARCH FOR DATA IN THE COLLECTION FOR ANY GIVEN SEARCH QUERIES //
 
   find(args = {}) {
-    const { keys, values } = this.createCond(args);
+    const { keys, values } = this.createKeyValue(args);
     const condition = Object.keys(args).length ? ` WHERE ${keys}` : '';
     return new Promise((resolve, reject) => {
       this.connect().then(client => {
@@ -92,7 +93,7 @@ export default class Database {
   findById(id) {
     return new Promise((resolve, reject) => {
       this.find({ id })
-        .then(res => resolve(res))
+        .then(res => resolve(res[0]))
         .catch(err => reject(this.createError(err)));
     });
   }
@@ -100,17 +101,40 @@ export default class Database {
   // METHOD TO UPDATE SPECIFIC DATA IN THE COLLECTION FOR A GIVEN ID //
 
   findByIdAndUpdate(id, args = {}) {
-    const { keys, values } = this.createCond(args, ',');
+    const { keys, values } = this.createKeyValue(args, ',');
     return new Promise((resolve, reject) => {
       this.findById(id)
         .then(found => {
           this.connect()
             .then(client => client.query(
-              `UPDATE ${this.table} SET ${keys} WHERE id=${
-                found[0].id
-              } returning*`,
+              `UPDATE ${this.table} SET ${keys} WHERE id=${found.id} returning*`,
               values
             ))
+            .then(res => resolve(res.rows))
+            .catch(err => reject(this.createError(err)));
+        })
+        .catch(err => reject(this.createError(err)));
+    });
+  }
+
+  // METHOD TO UPDATE RECORDS THST MATCH THE GIVEN CONDITIONS //
+
+  update(args = {}, conditions = {}) {
+    const { keys, values, lastIndex } = this.createKeyValue(args, ',');
+    const { keys: condKeys, values: condValues } = this.createKeyValue(
+      conditions,
+      'AND',
+      lastIndex
+    );
+    const condition = Object.keys(conditions).length ? `WHERE ${condKeys}` : '';
+    return new Promise((resolve, reject) => {
+      this.connect()
+        .then(client => {
+          client
+            .query(
+              `UPDATE ${this.table} SET ${keys} ${condition} returning*`,
+              values.concat(condValues)
+            )
             .then(res => resolve(res.rows))
             .catch(err => reject(this.createError(err)));
         })
@@ -126,7 +150,7 @@ export default class Database {
         .then(found => {
           this.connect()
             .then(client => client.query(
-              `DELETE FROM ${this.table} WHERE id=${found[0]}LIMIT 1 returning*`
+              `DELETE FROM ${this.table} WHERE id=${found.id}LIMIT 1 returning*`
             ))
             .then(res => resolve(res.rows))
             .catch(err => reject(this.createError(err)));
