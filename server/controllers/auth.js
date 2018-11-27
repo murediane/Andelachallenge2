@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     cb(null, `${new Date().toISOString()}${file.originalname}`);
-  }
+  },
 });
 
 const fileFilter = (req, file, cb) => {
@@ -23,7 +23,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage,
   limits: { fileSize: 1024 * 1024 * 5 },
-  fileFilter
+  fileFilter,
 });
 
 // /***************** CREATE THE USER ***************************************/
@@ -45,11 +45,11 @@ const createUser = (req, res) => {
       phone,
       email,
       password,
-      avatar
+      avatar,
     })
       .then(user => {
-        const token = jwt.sign({ ...user.email }, process.env.JWT_KEY, {
-          expiresIn: '1h'
+        const token = jwt.sign({ ...user.email, id: user.id }, process.env.JWT_KEY, {
+          expiresIn: '1h',
         });
         return res.status(201).json({ token, id: user.id });
       })
