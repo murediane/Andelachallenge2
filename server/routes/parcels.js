@@ -22,7 +22,7 @@ parcels.get(`${entry}`, getAll);
 
 parcels.get(`${entry}/:id`, getParcel);
 
-// /*********** CANCEL THE PARCEL DELIVERY ORDER ******************************/
+// /*********** CANCEL THE PARCEL DELIVERY ORDER ********************************/
 
 parcels.put(
   `${entry}/:id/cancel`,
