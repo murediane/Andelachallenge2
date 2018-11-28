@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import { validateParcel } from '../helpers/validators';
 import { parcels } from '../database';
 /** create your request handlers for the corresponding endpoints */
 
@@ -15,7 +15,9 @@ const getParcel = (req, res) => {
 
 // the create a new Parcel ****/
 const createParcel = (req, res) => {
-  const { error } = validateparcel(req.body);
+
+  const { error } = validateParcel(req.body);
+
   if (error) {
     res.status(400).send(error.details[0].message);
     return;
@@ -42,41 +44,7 @@ const userParcels = (req, res) => {
   return parcel
     ? res.send(parcel)
     : res.status(400).send({ message: 'invalid user_id' });
-};
-const validateparcel = parcel => {
-  const schema = {
-    userId: Joi.number()
-      .min(1)
-      .required(),
-    category: Joi.string()
-      .min(4)
-      .required(),
-    price: Joi.number()
-      .min(1)
-      .required(),
-    pickupLocation: Joi.string()
-      .min(4)
-      .required(),
-    destination: Joi.string()
-      .min(4)
-      .required(),
-    presentLocation: Joi.string()
-      .min(4)
-      .required(),
-    receiver: Joi.string()
-      .min(3)
-      .required(),
-    receiverEmail: Joi.string()
-      .min(4)
-      .required(),
-    recieverPhoneNumber: Joi.string()
-      .min(4)
-      .required(),
-    status: Joi.string()
-      .min(4)
-      .required(),
-  };
-  return Joi.validate(parcel, schema);
+
 };
 
 // export them all here

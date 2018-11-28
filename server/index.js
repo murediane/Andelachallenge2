@@ -1,11 +1,11 @@
-import express from 'express';
-import morgan from 'morgan';
+import express from "express";
+import morgan from "morgan";
 
-import constants from './config/constants';
-import middlewares from './middleware';
+import constants from "./config/constants";
+import middlewares from "./middleware";
 
 const server = express();
-server.use(morgan('dev'));
+server.use(morgan("dev"));
 server.use(express.json());
 
 // Passing all of our APIs config/endpoints to our express server to use them
