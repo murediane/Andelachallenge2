@@ -1,18 +1,27 @@
 @import url('./common.css');
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-image: url('../images/courrier2.jpg  ');
   background-repeat: no-repeat;
-  height: 100vh;
-  width: 100vw;
   background-size: cover;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.back {
+  margin: 15px auto;
+  padding: 15px 0;
+  clear: both;
+  width: 120px;
+  display: block;
+}
+.back a {
+  padding: 20px 15px;
+  background: #232323;
+  color: #ffffff;
+  text-align: center;
+}
 .modal {
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   width: 96%;

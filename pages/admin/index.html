@@ -1,213 +1,72 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>SendIT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="shortcut icon"
-      href="../../assets/icons/favicon.ico"
-      type="image/x-icon"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      media="screen"
-      href="../../assets/css/common.css"
-    />
+    <link rel="shortcut icon" href="../../assets/icons/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../../assets/css/common.css" />
     <link rel="stylesheet" type="text/css" href="../../assets/css/new-order.css" />
     <script src="../../js/common.js"></script>
-  </head>
+</head>
 
-  <body>
-    <section class="top-nav">
-      <div class="top-nav-left">
-        <a href="settings.html" class="svg" onclick="">
-          <img src="../../assets/icons/settings.png" alt="logo" />
-        </a>
-        <a href="delivered.html" class="svg" onclick="">
-          <img src="../../assets/icons/delivered.png" alt="logo" />
-        </a>
-        <a href="in-transit.html" class="svg" onclick="">
-          <img class="mini" src="../../assets/icons/transit.png" alt="logo" />
-        </a>
-        <a href="uncofirmed.html" class="svg" onclick="">
-          <img src="../../assets/icons/await.png" alt="logo" />
-        </a>
-        <a href="index.html" class="svg" onclick="">
-          <img src="../../assets/icons/dashboard.png" alt="logo" />
-        </a>
-      </div>
-      <div class="top-nav-right">
-        
-        <div class="dropdown">
-          <h2 class="user-name">Admin profile</h2>
-          <div class="avatar-cont">
-            
-          </div>
-          <div class="dropdown-content">
-            <a class="dropdown-item" href="../authentication/login.html">logout</a>
-          </div>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>SendIT</h1>
+            </div>
+
+    </header>
+
+    <section id="profile-box">
+        <div>
+            <ul>
+                <li>
+                    <a href="index.html">
+                        <div class="side-option ">
+                            <h1>Administrator</h1>
+                        </div>
+                    </a>
+                </li>
+
+            </ul>
+
         </div>
-      </div>
+
+
     </section>
+
 
     <section class="side-nav">
-      <a href="index.html">
-        <div class="side-option ">
-         
-          <h1>Admin Dashboard</h1>
-        </div>
-      </a>
-      
-         
-    </section>
-    
-    <section class="content">
-      
-        </div>
-      </div>
-      
+        <li><a href="../authentication/login.html"><b>LOG OUT</b></a></li>
 
-      <div class="lg-card">
-        <div class="lg-card-content">
-          <div class="data-table">
-            <table>
-              <tr>
-                  <th>Parcel id</th>
-                <th>Category</th>
-                <th>receiver Names</th>
-                <th>pickup location</th>
-                <th>destination</th>
-                <th>Reciever's phone number</th>
-                <th>Status</th>
-                <th>Change present location</th>
-                
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>50-100</td>
-                <td>Atete Gloria</td>
-                <td>Kicukiro</td>
-                <td>Nairobi</td>
-                <td>+254789993355</td>
-                <td>in-transit</td>
-                <td>
-                  <img
-                    onclick="openModal('edit-dest')"
-                    class="hover"
-                    src="../../assets/icons/edit.png"
-                    alt="lg"
-                    title="Update address"
-                  />
-                </td>
-                
-                
-              </tr>
-              <tr>
-                  <td>1</td>
-                  <td>50-100</td>
-                  <td>Atete Gloria</td>
-                  <td>Kicukiro</td>
-                  <td>Nairobi</td>
-                  <td>+254789993355</td>
-                  <td>in-transit</td>
-                  <td>
-                    <img
-                      onclick="openModal('edit-dest')"
-                      class="hover"
-                      src="../../assets/icons/edit.png"
-                      alt="lg"
-                      title="Update address"
-                    />
-                  </td>
-                  
-                  
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>50-100</td>
-                    <td>Atete Gloria</td>
-                    <td>Kicukiro</td>
-                    <td>Nairobi</td>
-                    <td>+254789993355</td>
-                    <td>in-transit</td>
-                    <td>
-                      <img
-                        onclick="openModal('edit-dest')"
-                        class="hover"
-                        src="../../assets/icons/edit.png"
-                        alt="lg"
-                        title="Update address"
-                      />
-                    </td>
-                    
-                    
-                  </tr>
-                  <tr>
-                      <td>1</td>
-                      <td>50-100</td>
-                      <td>Atete Gloria</td>
-                      <td>Kicukiro</td>
-                      <td>Nairobi</td>
-                      <td>+254789993355</td>
-                      <td>in-transit</td>
-                      <td>
-                        <img
-                          onclick="openModal('edit-dest')"
-                          class="hover"
-                          src="../../assets/icons/edit.png"
-                          alt="lg"
-                          title="Update address"
-                        />
-                      </td>
-                      
-                      
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>50-100</td>
-                        <td>Atete Gloria</td>
-                        <td>Kicukiro</td>
-                        <td>Nairobi</td>
-                        <td>+254789993355</td>
-                        <td>in-transit</td>
-                        <td>
-                          <img
-                            onclick="openModal('edit-dest')"
-                            class="hover"
-                            src="../../assets/icons/edit.png"
-                            alt="lg"
-                            title="Update address"
-                          />
-                        </td>
-                        
-                        
-                      </tr>
-                      <tr>
-                          <td>1</td>
-                          <td>50-100</td>
-                          <td>Atete Gloria</td>
-                          <td>Kicukiro</td>
-                          <td>Nairobi</td>
-                          <td>+254789993355</td>
-                          <td>in-transit</td>
-                          <td>
-                            <img
-                              onclick="openModal('edit-dest')"
-                              class="hover"
-                              src="../../assets/icons/edit.png"
-                              alt="lg"
-                              title="Update address"
-                            />
-                          </td>
-                          
-                          
+
+    </section>
+
+    <section class="content">
+
+        </div>
+        </div>
+
+
+        <div class="lg-card">
+            <div class="lg-card-content">
+                <div class="data-table">
+                    <table>
+                        <tr>
+                            <th>Parcel id</th>
+                            <th>Category</th>
+                            <th>receiver Names</th>
+                            <th>pickup location</th>
+                            <th>destination</th>
+                            <th>Reciever's phone number</th>
+                            <th>Status</th>
+                            <th>Change present location</th>
+
                         </tr>
                         <tr>
                             <td>1</td>
@@ -218,66 +77,134 @@
                             <td>+254789993355</td>
                             <td>in-transit</td>
                             <td>
-                              <img
-                                onclick="openModal('edit-dest')"
-                                class="hover"
-                                src="../../assets/icons/edit.png"
-                                alt="lg"
-                                title="Update address"
-                              />
+                                <img onclick="openModal('edit-dest')" class="hover" src="../../assets/icons/edit.png" alt="lg" title="Update address" />
                             </td>
-                            
-                            
-                          </tr>
-                          <tr>
-                              <td>1</td>
-                              <td>50-100</td>
-                              <td>Atete Gloria</td>
-                              <td>Kicukiro</td>
-                              <td>Nairobi</td>
-                              <td>+254789993355</td>
-                              <td>in-transit</td>
-                              <td>
-                                <img
-                                  onclick="openModal('edit-dest')"
-                                  class="hover"
-                                  src="../../assets/icons/edit.png"
-                                  alt="lg"
-                                  title="Update address"
-                                />
-                              </td>
-                              
-                              
-                            </tr>
-              
-            </table>
-          </div>
+
+
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>50-100</td>
+                            <td>Atete Gloria</td>
+                            <td>Kicukiro</td>
+                            <td>Nairobi</td>
+                            <td>+254789993355</td>
+                            <td>in-transit</td>
+                            <td>
+                                <img onclick="openModal('edit-dest')" class="hover" src="../../assets/icons/edit.png" alt="lg" title="Update address" />
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>50-100</td>
+                            <td>Atete Gloria</td>
+                            <td>Kicukiro</td>
+                            <td>Nairobi</td>
+                            <td>+254789993355</td>
+                            <td>in-transit</td>
+                            <td>
+                                <img onclick="openModal('edit-dest')" class="hover" src="../../assets/icons/edit.png" alt="lg" title="Update address" />
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>50-100</td>
+                            <td>Atete Gloria</td>
+                            <td>Kicukiro</td>
+                            <td>Nairobi</td>
+                            <td>+254789993355</td>
+                            <td>in-transit</td>
+                            <td>
+                                <img onclick="openModal('edit-dest')" class="hover" src="../../assets/icons/edit.png" alt="lg" title="Update address" />
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>50-100</td>
+                            <td>Atete Gloria</td>
+                            <td>Kicukiro</td>
+                            <td>Nairobi</td>
+                            <td>+254789993355</td>
+                            <td>in-transit</td>
+                            <td>
+                                <img onclick="openModal('edit-dest')" class="hover" src="../../assets/icons/edit.png" alt="lg" title="Update address" />
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>50-100</td>
+                            <td>Atete Gloria</td>
+                            <td>Kicukiro</td>
+                            <td>Nairobi</td>
+                            <td>+254789993355</td>
+                            <td>in-transit</td>
+                            <td>
+                                <img onclick="openModal('edit-dest')" class="hover" src="../../assets/icons/edit.png" alt="lg" title="Update address" />
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>50-100</td>
+                            <td>Atete Gloria</td>
+                            <td>Kicukiro</td>
+                            <td>Nairobi</td>
+                            <td>+254789993355</td>
+                            <td>in-transit</td>
+                            <td>
+                                <img onclick="openModal('edit-dest')" class="hover" src="../../assets/icons/edit.png" alt="lg" title="Update address" />
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>50-100</td>
+                            <td>Atete Gloria</td>
+                            <td>Kicukiro</td>
+                            <td>Nairobi</td>
+                            <td>+254789993355</td>
+                            <td>in-transit</td>
+                            <td>
+                                <img onclick="openModal('edit-dest')" class="hover" src="../../assets/icons/edit.png" alt="lg" title="Update address" />
+                            </td>
+
+
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
-    
+
     <section class="modal change-dest" id="edit-dest">
-      <div class="modal-header">
-        Change Current location
-        <img
-          onclick="closeModal('edit-dest')"
-          src="../../assets/icons/x-button.png"
-          alt="lg"
-          title="Cancel"
-        />
-      </div>
-      <div class="modal-body">
-        <div class="input-group">
-          <div class="input-group-addon">
-            <img src="../../assets/icons/destination.png" alt="" />
-          </div>
-          <input class="modal-form-control" placeholder="Current address" />
+        <div class="modal-header">
+            Change Current location
+            <img onclick="closeModal('edit-dest')" src="../../assets/icons/x-button.png" alt="lg" title="Cancel" />
         </div>
-        <a class="modal-submit" href="#">
-          <img class="fab-icon" src="../../assets/icons/confirm.png" alt="logo" />
-          <p>save changes</p>
-        </a>
-      </div>
+        <div class="modal-body">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <img src="../../assets/icons/destination.png" alt="" />
+                </div>
+                <input class="modal-form-control" placeholder="Current address" />
+            </div>
+            <a class="modal-submit" href="#">
+                <img class="fab-icon" src="../../assets/icons/confirm.png" alt="logo" />
+                <p>save changes</p>
+            </a>
+        </div>
     </section>
-  </body>
+</body>
+
 </html>
