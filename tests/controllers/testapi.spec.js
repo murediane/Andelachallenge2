@@ -28,10 +28,11 @@ describe('POST parcels', () => {
       .post('/api/v1/parcels')
       .send(myfakeData1)
       .end((err, res) => {
-        res.body.should.be.a('object');
+        res.should.have.status(201);
+        //res.body.should.be.a('object');
         res.body.should.have
-          .property('usr_id')
-          .be.a('number', 'Expected user_id to be a number');
+          .property('userId')
+          .be.a('number', 'Expected userId to be a number');
         res.body.should.have.property('category');
         res.body.category.should.be.a(
           'string',
@@ -39,18 +40,18 @@ describe('POST parcels', () => {
         );
         res.body.should.have.property('price');
         res.body.price.should.be.a('number', 'Expected price to be a number');
-        res.body.should.have.property('pickuploc');
-        res.body.pickuploc.should.be.a(
+        res.body.should.have.property('pickupLocation');
+        res.body.pickupLocation.should.be.a(
           'string',
-          'Expected the pickuploc to be a string',
+          'Expected the pickupLocation to be a string',
         );
         res.body.should.have.property('destination');
         res.body.destination.should.be.a(
           'string',
           'Expected the destination to be a string',
         );
-        res.body.should.have.property('presentlocation');
-        res.body.presentlocation.should.be.a(
+        res.body.should.have.property('presentLocation');
+        res.body.presentLocation.should.be.a(
           'string',
           'Expected the presentlocation to be a string',
         );
@@ -59,13 +60,13 @@ describe('POST parcels', () => {
           'string',
           'Expected the receiver to be a string',
         );
-        res.body.should.have.property('re_email');
-        res.body.re_email.should.be.a(
+        res.body.should.have.property('receiverEmail');
+        res.body.receiverEmail.should.be.a(
           'string',
-          'Expected the re_email to be a string',
+          'Expected the receiverEmail to be a string',
         );
-        res.body.should.have.property('re_phoneno');
-        res.body.re_phoneno.should.be.a(
+        res.body.should.have.property('recieverPhoneNumber');
+        res.body.recieverPhoneNumber.should.be.a(
           'string',
           'Expected the re_phoneno to be a string',
         );
@@ -105,11 +106,11 @@ describe('GET parcels/: id user', () => {
   it('should display all parcels of a specific user', () => {
     chai
       .request(server)
-      .get(`/api/v1/users/${myfakeData2.usr_id}/parcels`)
+      .get(`/api/v1/users/${myfakeData2.userId}/parcels`)
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.a('object');
-        res.body.should.have.property('usr_id');
+        res.body.should.have.property('userId');
       });
   });
   it('should display all parcels of a specific user', () => {
@@ -135,7 +136,6 @@ describe('PUT parcels/:id parcel /cancel', () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.a('object');
-        // res.body.should.have.property('');
       });
   });
 
@@ -147,7 +147,16 @@ describe('PUT parcels/:id parcel /cancel', () => {
         res.should.have.status(200);
         res.should.be.a('object');
         res.body.should.have.property('message');
-        // res.body.should.have.property('');
+      });
+  });
+  it('should cancel parcel with the given id', () => {
+    chai
+      .request(server)
+      .put(`/api/v1/parcels/${myfakeData2.id}/cancel`)
+      .end((err, res) => {
+        res.should.have.status(200);
+        console.log(res.text);
+        res.body.should.have.property('status', 'cancel', 'status should canceled');
       });
   });
 });
