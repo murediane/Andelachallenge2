@@ -15,7 +15,7 @@ const getAll = (req, res) => {
   Parcel.find(sender ? { sender, ...req.query } : req.query)
     .then(parcels => (parcels.length
       ? res.status(200).json({ error: null, parcels })
-      : res.status(204).json({ error: { message: 'no content' } })))
+      : res.status(204).json({ error: { message: 'no content' } })),)
     .catch(err => res.status(400).json({ error: err }));
 };
 
