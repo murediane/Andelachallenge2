@@ -1,10 +1,11 @@
 import express, { Router } from 'express';
 // import all of your routes from their files
 import parcelRoutes from './parcels';
+import userRoutes from './authentication';
 
 const routes = Router();
 
-// API ENTRYPOINT 
+// API ENTRYPOINT
 
 const entryPoint = Router();
 entryPoint.get('/', (req, res) => {
@@ -15,8 +16,8 @@ entryPoint.get('/', (req, res) => {
 
 const uploads = ('/uploads', express.static('uploads'));
 
-//ALL ENDPOINTS 
+//ALL ENDPOINTS
 
-routes.use(entryPoint, parcelRoutes, uploads);
+routes.use(entryPoint, parcelRoutes, userRoutes, uploads);
 
 export default routes;

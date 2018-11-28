@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import { validateParcel } from '../helpers/validators';
 import { parcels } from '../database';
 /** create your request handlers for the corresponding endpoints */
 
@@ -15,42 +15,9 @@ const getParcel = (req, res) => {
 
 // the create a new Parcel ****/
 const createParcel = (req, res) => {
-  const schema = {
-    user_id: Joi.number()
-      .min(1)
-      .required(),
-    category: Joi.string()
-      .min(4)
-      .required(),
-    price: Joi.number()
-      .min(1)
-      .required(),
-    pickuploc: Joi.string()
-      .min(4)
-      .required(),
-    destination: Joi.string()
-      .min(4)
-      .required(),
-    presentlocation: Joi.string()
-      .min(4)
-      .required(),
-    receiver: Joi.string()
-      .min(3)
-      .required(),
-    re_email: Joi.string()
-      .min(4)
-      .required(),
-    re_phoneno: Joi.string()
-      .min(4)
-      .required(),
-    status: Joi.string()
-      .min(4)
-      .required(),
-  };
-  const result = Joi.validate(req.body, schema);
-
-  if (result.error) {
-    res.status(400).send(result.error.details[0].message);
+  const { error } = validateParcel(req.body);
+  if (error) {
+    res.status(400).send(error.details[0].message);
     return;
   }
   const parcel = { id: parcels.length + 1, ...req.body };
@@ -62,54 +29,19 @@ const createParcel = (req, res) => {
 const cancelParcel = (req, res) => {
   const { id } = req.params;
   const parcel = parcels.find(p => p.id === parseInt(id));
-  if (!parcel) res.status(404).send('the parcels with a given id does not exist');
-  const schema = {
-    user_id: Joi.number()
-      .min(1)
-      .required(),
-    category: Joi.string()
-      .min(4)
-      .required(),
-    price: Joi.number()
-      .min(1)
-      .required(),
-    pickuploc: Joi.string()
-      .min(4)
-      .required(),
-    destination: Joi.string()
-      .min(4)
-      .required(),
-    presentlocation: Joi.string()
-      .min(4)
-      .required(),
-    receiver: Joi.string()
-      .min(3)
-      .required(),
-    re_email: Joi.string()
-      .min(4)
-      .required(),
-    re_phoneno: Joi.string()
-      .min(4)
-      .required(),
-    status: Joi.string()
-      .min(4)
-      .required(),
-  };
-  const result = Joi.validate(req.body, schema);
-  if (result.error) return res.status(400).send(result.error.details[0].message);
+  if (!parcel) return res.status(200).send({ message: 'invalid id' });
+
   parcel.status = 'cancel';
-  return res.send(parcel);
+  return res.status(200).send({ ...parcel });
 };
 
 // get order by user id endpoint
 const userParcels = (req, res) => {
-  const { id, userid } = req.params;
-  const parcel = parcels.find(
-    p => p.user_id === parseInt(userid) && p.id === parseInt(id),
-  );
+  const { id, userId } = req.params;
+  const parcel = parcels.find(p => p.userId === parseInt(userId));
   return parcel
     ? res.send(parcel)
-    : res.status(404).send('the parcels with a given id does not exist');
+    : res.status(400).send({ message: 'invalid user_id' });
 };
 
 // export them all here
