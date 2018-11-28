@@ -4,3 +4,4 @@ yarn.*
 yarn-error.*
 coverage
 .nyc_output
+.env

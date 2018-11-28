@@ -17,11 +17,11 @@ const createUser = (req, res) => {
       names,
       phone,
       email,
-      password,
+      password
     })
       .then(user => {
         const token = jwt.sign({ ...user.email }, process.env.JWT_KEY, {
-          expiresIn: '1h',
+          expiresIn: '1h'
         });
         return res.status(201).send({ token, id: user.id });
       })
@@ -29,4 +29,33 @@ const createUser = (req, res) => {
   });
 };
 
-export { createUser };
+// /***************** THE USER ACCOUNT LOGIN ********************************/
+
+const login = (req, res) => {
+  const { email, password: pass } = req.body;
+  User.find({ email })
+    .then(users => {
+      bcrypt.compare(pass, users[0].password, (err, same) => {
+        if (same === true) {
+          return res.status(200).json({
+            error: null,
+            token: jwt.sign({ ...users[0].email }, process.env.JWT_KEY, {
+              expiresIn: '1h'
+            }),
+            id: users[0].id
+          });
+        }
+        return res.status(401).json({
+          error: {
+            name: 'ValidationError',
+            message: 'email or password mismatch!'
+          }
+        });
+      });
+    })
+    .catch(err => res.status(401).json({ error: err }));
+};
+
+// /************************ EXPORT ALL USERS AUTH HANDLERS ******************/
+
+export { createUser, login };

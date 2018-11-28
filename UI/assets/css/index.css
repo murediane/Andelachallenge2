@@ -27,13 +27,21 @@ header nav ul {
   width: fit-content;
 }
 header nav ul li {
+<<<<<<< HEAD
   display: inline;
+=======
+  display: block;
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
   float: left;
   list-style: none;
   padding: 0 16px;
 }
 header nav ul li a {
+<<<<<<< HEAD
   font-family: Arial, Helvetica, sans-serif;
+=======
+  font-family: Catamaran;
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
   font-size: 14px;
   font-weight: 200;
   /* text-transform: uppercase; */
@@ -43,12 +51,19 @@ header nav ul li a {
 .index-banner {
   width: 100%;
   height: calc(100vh - 100px);
+<<<<<<< HEAD
   background-image: url('../images/courrier2.jpg');
+=======
+  background-image: url('../images/background.jpg');
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   display: table;
+<<<<<<< HEAD
   background-color: rgba(0, 0, 0, 0.5);
+=======
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
 }
 
 .nf-banner {

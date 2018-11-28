@@ -56,7 +56,11 @@ td,
 button {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+<<<<<<< HEAD
   font-family: 'Gotham-Light';
+=======
+  font-family: "Gotham-Light";
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
   font-weight: inherit;
   margin: 0%;
   padding: 0%;
@@ -65,13 +69,18 @@ button {
 a {
   text-decoration: none;
   color: var(--main-white);
+<<<<<<< HEAD
   font-family: 'Gotham-Medium';
+=======
+  font-family: "Gotham-Medium";
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
 }
 
 /* Constant definitions */
 
 :root {
   --main-white: #f5f5f5;
+<<<<<<< HEAD
   --primary: #757780;
   --primary-light: #a4a6af;
   --primary-dark: #494b54;
@@ -79,6 +88,15 @@ a {
   --secondary: #d2cca1;
   --secondary-light: #ffffd2;
   --secondary-dark: #a09b72;
+=======
+  --primary: #5f9ea0;
+  --primary-light: #8fcfd1;
+  --primary-dark: #2f6f72;
+  --primary-gray: #ddd;
+  --secondary: #006600;
+  --secondary-light: #439534;
+  --secondary-dark: #003a00;
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
   --content-color: rgb(230, 225, 225);
   --text-color: #ffffff;
   --border-color: #b0c4de;
@@ -281,11 +299,19 @@ a {
 
 .side-option h1 {
   padding: 0px 10px;
+<<<<<<< HEAD
   /* font-family: Cormorant Garamond; */
   font-size: 20px;
   font-weight: bold;
   text-transform: capitalize;text-align: 
   font-style: Helvetica;
+=======
+  font-family: Cormorant Garamond;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+  font-style: italic;
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
   text-align: center;
   text-shadow: 2px 2px 8px #111;
 }
@@ -373,6 +399,7 @@ a {
 /* Tabular data components' styles  */
 
 .data-table {
+<<<<<<< HEAD
   overflow-x: scroll;
 }
 
@@ -383,6 +410,18 @@ a {
   border: 1px solid rgb(12, 11, 11);
   font-size: 100%;
   font-style: Helvetica;
+=======
+  overflow-x: auto;
+}
+
+.data-table table {
+  border-collapse: collapse;
+  width: 100%;
+  color: gray;
+  border: 1px solid #ddd;
+  font-size: 100%;
+  font-style: italic;
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
   font-weight: 200;
 }
 
@@ -405,12 +444,17 @@ a {
 }
 
 .data-table tr:hover:not(:nth-child(1)) {
+<<<<<<< HEAD
   background-color: var(--primary-dark);
+=======
+  background-color: var(--secondary-light);
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
   color: white;
   font-weight: bold;
 }
 
 .data-table tr:hover .hover {
+<<<<<<< HEAD
   display: flex;
 }
 
@@ -422,6 +466,19 @@ a {
 
 .hover {
   display: flow-root;
+=======
+  display: block;
+}
+
+.data-table td img {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.hover {
+  display: none;
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
 }
 
 /* Floating action button */
@@ -429,11 +486,16 @@ a {
 .fab {
   padding: 0.1%;
   border-radius: 40px;
+<<<<<<< HEAD
   display: block;
+=======
+  display: flex;
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
   justify-content: center;
   z-index: 1;
   align-items: center;
   position: fixed;
+<<<<<<< HEAD
   left: 25px;
   bottom: 10px;
   /*top: 200px;
@@ -448,6 +510,21 @@ a {
 
 .fab:hover p {
   display: block;
+=======
+  right: 10px;
+  bottom: 10px;
+  animation-name: fab;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+.fab:hover {
+  transition-duration: 0.2s;
+}
+
+.fab:hover p {
+  display: flex;
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
 }
 
 .fab img {
@@ -456,9 +533,15 @@ a {
 }
 
 .fab p {
+<<<<<<< HEAD
   font-family: Helvetica;
   font-weight: 900;
   display: block;
+=======
+  font-family: Cormorant Garamond;
+  font-weight: 900;
+  display: none;
+>>>>>>> ae6e737c1fc2233e648d149632bc9eceba839c2b
   font-size: 18px;
   color: var(--text-color);
   font-style: italic;

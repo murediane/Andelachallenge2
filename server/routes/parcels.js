@@ -2,10 +2,10 @@ import { Router } from 'express';
 
 import {
   createParcel,
-  cancelParcel,
+  updateParcel,
   userParcels,
   getAll,
-  getParcel,
+  getParcel
 } from '../controllers/parcels';
 
 const router = Router();
@@ -25,11 +25,11 @@ router.post(`${entry}`, createParcel);
 
 //  CANCEL THE PARCEL
 
-router.put(`${entry}/:id/cancel`, cancelParcel);
+router.put(`${entry}/:id/cancel`, updateParcel);
 
 //  GET ALL USER PARCELS
 
-router.get(`/users/:userId${entry}`, userParcels);
+// router.get(`/users/:userId${entry}`, userParcels);
 
 // Export  router
 
