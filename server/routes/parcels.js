@@ -4,7 +4,7 @@ import {
   createParcel,
   getAll,
   getParcel,
-  cancelOrder
+  updateParcel
 } from '../controllers/parcels';
 
 const parcels = Router();
@@ -22,9 +22,21 @@ parcels.get(`${entry}`, getAll);
 
 parcels.get(`${entry}/:id`, getParcel);
 
-// /*********** CANCEL THE PARCEL DELIVERY ORDER ******************************/
+// /*********** CANCEL THE PARCEL DELIVERY ORDER ********************************/
 
-parcels.put(`${entry}/:id/cancel`, cancelOrder);
+parcels.put(
+  `${entry}/:id/cancel`,
+  (req, res, next) => {
+    req.body.status = 'cancelled';
+    next();
+  },
+  updateParcel
+);
+
+// /*********** CHANGE THE ORDER'S DESTINATION *********************************/
+
+parcels.put(`${entry}/:id/destination`, updateParcel);
+
 // /************************ END OF PARCELS APIs ******************************/
 
 export default parcels;
