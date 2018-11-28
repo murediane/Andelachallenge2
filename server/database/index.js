@@ -1,3 +1,4 @@
+
 import Joi from 'joi';
 import { Pool } from 'pg';
 import dbConfig from '../config/db';
@@ -153,3 +154,5 @@ export default class Database {
     });
   }
 }
+
+

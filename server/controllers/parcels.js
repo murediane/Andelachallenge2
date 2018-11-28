@@ -9,20 +9,22 @@ const getAll = (req, res) => res.send(parcels);
 const getParcel = (req, res) => {
   const { id } = req.params;
   const parcel = parcels.find(p => p.id === parseInt(id));
-  if (!parcel) res.status(404).send('the parcels with a given id doesnot exist');
-  res.send(parcel);
+  if (!parcel) return res.status(400).send({ message: 'invalid id' });
+  return res.send(parcel);
 };
 
 // the create a new Parcel ****/
 const createParcel = (req, res) => {
+
   const { error } = validateParcel(req.body);
+
   if (error) {
     res.status(400).send(error.details[0].message);
     return;
   }
   const parcel = { id: parcels.length + 1, ...req.body };
   parcels.push(parcel);
-  return res.send(parcel);
+  return res.status(201).send(parcel);
 };
 
 // the cancel the specific Parcel ****/
@@ -42,9 +44,8 @@ const userParcels = (req, res) => {
   return parcel
     ? res.send(parcel)
     : res.status(400).send({ message: 'invalid user_id' });
+
 };
 
 // export them all here
-export {
-  getAll, getParcel, createParcel, cancelParcel, userParcels,
-};
+export { getAll, getParcel, createParcel, cancelParcel, userParcels };

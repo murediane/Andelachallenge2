@@ -1,3 +1,4 @@
+
 import Joi from 'joi';
 
 const validateParcel = parcel => {
@@ -51,3 +52,4 @@ const validateUser = user => {
   return Joi.validate(user, schema);
 };
 export { validateParcel, validateUser };
+
