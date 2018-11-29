@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import {
   createParcel,
-  updateParcel,
+  cancelParcel,
   userParcels,
   getAll,
   getParcel
@@ -25,11 +25,18 @@ router.post(`${entry}`, createParcel);
 
 //  CANCEL THE PARCEL
 
-router.put(`${entry}/:id/cancel`, updateParcel);
+router.put(
+  `${entry}/:id/cancel`,
+  (req, res, next) => {
+    req.body.status = 'cancelled';
+    next();
+  },
+  cancelParcel
+);
 
 //  GET ALL USER PARCELS
 
-// router.get(`/users/:userId${entry}`, userParcels);
+router.get(`/users/:userId${entry}`, userParcels);
 
 // Export  router
 

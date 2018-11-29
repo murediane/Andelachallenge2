@@ -1,6 +1,6 @@
 import Parcel from '../models/Parcel';
 
-// /***************** CREATE THE PARCEL ***************************************/
+//  Create a new parcel
 
 const createParcel = (req, res) => {
   Parcel.save({ ...req.body })
@@ -8,18 +8,20 @@ const createParcel = (req, res) => {
     .catch(err => res.status(400).json({ error: err }));
 };
 
-// /**GET ALL PARCELS [filter them with search queries/getAll if no queries]****/
+// Get all parcels
 
 const getAll = (req, res) => {
   const { id: sender = null } = req.params;
   Parcel.find(sender !== null ? { sender, ...req.query } : req.query)
-    .then(parcels => (parcels.length
-      ? res.status(200).json({ error: null, parcels })
-      : res.status(204).json({ error: { message: 'no content' } })),)
+    .then(parcels =>
+      parcels.length
+        ? res.status(200).json({ error: null, parcels })
+        : res.status(204).json({ error: { message: 'No parcel created yet' } })
+    )
     .catch(err => res.status(400).json({ error: err }));
 };
 
-// /***************** GET THE PARCEL BY ID ************************************/
+//  Get parcel by Id
 
 const getParcel = (req, res) => {
   const { id } = req.params;
@@ -27,21 +29,26 @@ const getParcel = (req, res) => {
     .then(parcel => res.status(200).json({ error: null, parcel }))
     .catch(err => res.status(400).json({ error: err }));
 };
+const userParcels = (req, res) => {
+  const { userId: sender } = req.params;
+  Parcel.find({ sender })
+    .then(parcels => res.status(200).json({ error: null, parcels }))
+    .catch(err => res.status(400).json({ error: err }));
+};
+// user cancel a specific delivery order
 
-// /*********** CANCEL THE PARCEL DELIVERY ORDER ******************************/
-
-const updateParcel = (req, res) => {
+const cancelParcel = (req, res) => {
   const { id } = req.params;
   if (Object.keys(req.body).length) {
     Parcel.findById(id)
       .then(record => {
         if (
-          record.status.toLowerCase() === 'delivered'
-          || record.status.toLowerCase() === 'cancelled'
+          record.status.toLowerCase() === 'delivered' ||
+          record.status.toLowerCase() === 'cancelled'
         ) {
           res.status(400).json({
             error: {
-              message: "can't update the delivered or cancelled order",
+              message: 'your order has been delivered or cancelled earlier',
               name: 'ValidationError'
             }
           });
@@ -62,8 +69,4 @@ const updateParcel = (req, res) => {
   }
 };
 
-// /************************ END OF PARCELS APIs ******************************/
-
-export {
-  createParcel, getAll, getParcel, updateParcel
-};
+export { createParcel, getAll, getParcel, cancelParcel, userParcels };

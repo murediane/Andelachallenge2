@@ -18,8 +18,11 @@ const schema = Joi.object().keys({
   receiverName: Joi.string()
     .min(3)
     .required(),
+  sender: Joi.number()
+    .min(1)
+    .required(),
 
-  RecieverEmail: Joi.string()
+  receiverEmail: Joi.string()
     .required()
     .min(1),
   receiverPhoneNumber: Joi.number()
