@@ -28,10 +28,10 @@ const schema = Joi.object().keys({
   receiverPhoneNumber: Joi.number()
     .required()
     .min(1),
-
-  status: Joi.string()
-    .only('intransit', 'delivered', 'cancelled')
-    .default('pending')
+  sender: Joi.number(),
+  status: Joi.string(),
+  //.only('transit', 'delivered', 'cancelled')
+  //.default('pending'),
 });
 
 export default new Database(schema, 'parcels');
