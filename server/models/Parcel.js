@@ -27,8 +27,8 @@ const schema = Joi.object().keys({
     .min(1),
 
   status: Joi.string()
-    .only('transit', 'delivered', 'cancelled')
-    .default('pending'),
+    .only('intransit', 'delivered', 'cancelled')
+    .default('pending')
 });
 
 export default new Database(schema, 'parcels');
