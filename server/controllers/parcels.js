@@ -16,7 +16,7 @@ const getAll = (req, res) => {
     .then(parcels =>
       parcels.length
         ? res.status(200).json({ error: null, parcels })
-        : res.status(204).json({ error: { message: 'No parcel created yet' } }),
+        : res.status(204).json({ error: { message: 'No parcel created yet' } })
     )
     .catch(err => res.status(400).json({ error: err }));
 };
@@ -26,7 +26,7 @@ const getAll = (req, res) => {
 const getParcel = (req, res) => {
   const { id } = req.params;
   Parcel.findById(id)
-    .then(parcel => res.status(200).json({ error: null, parcel }))
+    .then(parcel => res.status(200).json({ error: { message: 'found' }, parcel }))
     .catch(err => res.status(400).json({ error: err }));
 };
 const userParcels = (req, res) => {
