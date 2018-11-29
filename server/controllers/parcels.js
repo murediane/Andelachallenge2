@@ -48,7 +48,7 @@ const updateParcel = (req, res) => {
         ) {
           res
             .status(400)
-            .json({ message: "Can't update the delivered or cancelled order" });
+            .json({ message: 'your order has been delivered or cancelled earlier' });
         } else {
           Parcel.update({ ...req.body }, { id })
             .then(parcels => {
