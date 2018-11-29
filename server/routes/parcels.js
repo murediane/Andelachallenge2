@@ -11,7 +11,7 @@ import {
 const router = Router();
 const entry = '/parcels';
 
-//  GET ALL PARCELS
+//  GET ALL PARCELSy
 
 router.get(`${entry}`, getAll);
 
@@ -29,9 +29,9 @@ router.put(`${entry}/:id/cancel`, updateParcel);
 //CHANGE DESTINATION
 router.put(`${entry}/:id/destination`, updateParcel);
 // CHANGE  Status
-//router.put(`${entry}/:id/status`, updateParcel);
+router.put(`${entry}/:id/status`, updateParcel);
 //Change presentLocation
-//router.put(`${entry}/:id/presentLocation`, updateParcel);
+router.put(`${entry}/:id/presentLocation`, updateParcel);
 
 //  GET ALL USER PARCELS
 
