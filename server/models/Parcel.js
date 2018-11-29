@@ -18,8 +18,11 @@ const schema = Joi.object().keys({
   receiverName: Joi.string()
     .min(3)
     .required(),
+  sender: Joi.number()
+    .min(1)
+    .required(),
 
-  RecieverEmail: Joi.string()
+  receiverEmail: Joi.string()
     .required()
     .min(1),
   receiverPhoneNumber: Joi.number()
@@ -27,8 +30,8 @@ const schema = Joi.object().keys({
     .min(1),
 
   status: Joi.string()
-    .only('transit', 'delivered', 'cancelled')
-    .default('pending'),
+    .only('intransit', 'delivered', 'cancelled')
+    .default('pending')
 });
 
 export default new Database(schema, 'parcels');

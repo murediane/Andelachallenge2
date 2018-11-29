@@ -1,51 +1,72 @@
-import { validateParcel } from '../helpers/validators';
-import { parcels } from '../database';
-/** create your request handlers for the corresponding endpoints */
+import Parcel from '../models/Parcel';
 
-// the getAll parcels ****/
-const getAll = (req, res) => res.send(parcels);
+//  Create a new parcel
 
-// the get a specific Parcel ****/
+const createParcel = (req, res) => {
+  Parcel.save({ ...req.body })
+    .then(parcel => res.status(201).json({ error: null, parcel }))
+    .catch(err => res.status(400).json({ error: err }));
+};
+
+// Get all parcels
+
+const getAll = (req, res) => {
+  const { id: sender = null } = req.params;
+  Parcel.find(sender !== null ? { sender, ...req.query } : req.query)
+    .then(parcels =>
+      parcels.length
+        ? res.status(200).json({ error: null, parcels })
+        : res.status(204).json({ error: { message: 'No parcel created yet' } })
+    )
+    .catch(err => res.status(400).json({ error: err }));
+};
+
+//  Get parcel by Id
+
 const getParcel = (req, res) => {
   const { id } = req.params;
-  const parcel = parcels.find(p => p.id === parseInt(id));
-  if (!parcel) return res.status(400).send({ message: 'invalid id' });
-  return res.send(parcel);
+  Parcel.findById(id)
+    .then(parcel => res.status(200).json({ error: null, parcel }))
+    .catch(err => res.status(400).json({ error: err }));
 };
-
-// the create a new Parcel ****/
-const createParcel = (req, res) => {
-
-  const { error } = validateParcel(req.body);
-
-  if (error) {
-    res.status(400).send(error.details[0].message);
-    return;
-  }
-  const parcel = { id: parcels.length + 1, ...req.body };
-  parcels.push(parcel);
-  return res.status(201).send(parcel);
+const userParcels = (req, res) => {
+  const { userId: sender } = req.params;
+  Parcel.find({ sender })
+    .then(parcels => res.status(200).json({ error: null, parcels }))
+    .catch(err => res.status(400).json({ error: err }));
 };
+// user cancel a specific delivery order
 
-// the cancel the specific Parcel ****/
 const cancelParcel = (req, res) => {
   const { id } = req.params;
-  const parcel = parcels.find(p => p.id === parseInt(id));
-  if (!parcel) return res.status(200).send({ message: 'invalid id' });
-
-  parcel.status = 'cancel';
-  return res.status(200).send({ ...parcel });
+  if (Object.keys(req.body).length) {
+    Parcel.findById(id)
+      .then(record => {
+        if (
+          record.status.toLowerCase() === 'delivered' ||
+          record.status.toLowerCase() === 'cancelled'
+        ) {
+          res.status(400).json({
+            error: {
+              message: 'your order has been delivered or cancelled earlier',
+              name: 'ValidationError'
+            }
+          });
+        } else {
+          Parcel.update({ ...req.body }, { id })
+            .then(parcels => {
+              const [parcel] = parcels;
+              res.status(201).json({ error: null, parcel });
+            })
+            .catch(err => res.status(400).json({ error: err }));
+        }
+      })
+      .catch(err => res.status(400).json({ error: err }));
+  } else {
+    res.status(400).json({
+      error: { message: "can't empty the record", name: 'ValidationError' }
+    });
+  }
 };
 
-// get order by user id endpoint
-const userParcels = (req, res) => {
-  const { id, userId } = req.params;
-  const parcel = parcels.find(p => p.userId === parseInt(userId));
-  return parcel
-    ? res.send(parcel)
-    : res.status(400).send({ message: 'invalid user_id' });
-
-};
-
-// export them all here
-export { getAll, getParcel, createParcel, cancelParcel, userParcels };
+export { createParcel, getAll, getParcel, cancelParcel, userParcels };

@@ -5,7 +5,7 @@ import {
   cancelParcel,
   userParcels,
   getAll,
-  getParcel,
+  getParcel
 } from '../controllers/parcels';
 
 const router = Router();
@@ -25,7 +25,14 @@ router.post(`${entry}`, createParcel);
 
 //  CANCEL THE PARCEL
 
-router.put(`${entry}/:id/cancel`, cancelParcel);
+router.put(
+  `${entry}/:id/cancel`,
+  (req, res, next) => {
+    req.body.status = 'cancelled';
+    next();
+  },
+  cancelParcel
+);
 
 //  GET ALL USER PARCELS
 
