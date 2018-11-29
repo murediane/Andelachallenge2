@@ -4,7 +4,7 @@ import Parcel from '../models/Parcel';
 
 const createParcel = (req, res) => {
   Parcel.save({ ...req.body })
-    .then(parcel => res.status(201).json({ error: null, parcel }))
+    .then(parcel => res.status(201).json({ error: { message: 'created' }, parcel }))
     .catch(err => res.status(400).json({ error: err }));
 };
 
@@ -16,7 +16,7 @@ const getAll = (req, res) => {
     .then(parcels =>
       parcels.length
         ? res.status(200).json({ error: null, parcels })
-        : res.status(204).json({ error: { message: 'No parcel created yet' } })
+        : res.status(204).json({ error: { message: 'No parcel created yet' } }),
     )
     .catch(err => res.status(400).json({ error: err }));
 };
@@ -35,9 +35,9 @@ const userParcels = (req, res) => {
     .then(parcels => res.status(200).json({ error: null, parcels }))
     .catch(err => res.status(400).json({ error: err }));
 };
-// user cancel a specific delivery order
+// user update a specific delivery order
 
-const cancelParcel = (req, res) => {
+const updateParcel = (req, res) => {
   const { id } = req.params;
   if (Object.keys(req.body).length) {
     Parcel.findById(id)
@@ -46,27 +46,24 @@ const cancelParcel = (req, res) => {
           record.status.toLowerCase() === 'delivered' ||
           record.status.toLowerCase() === 'cancelled'
         ) {
-          res.status(400).json({
-            error: {
-              message: 'your order has been delivered or cancelled earlier',
-              name: 'ValidationError'
-            }
-          });
+          res
+            .status(400)
+            .json({ message: "Can't update the delivered or cancelled order" });
         } else {
           Parcel.update({ ...req.body }, { id })
             .then(parcels => {
               const [parcel] = parcels;
-              res.status(201).json({ error: null, parcel });
+              return res.status(201).json({ message: 'success', parcel });
             })
-            .catch(err => res.status(400).json({ error: err }));
+            .catch(err => res.status(400).json({ message: err.message }));
         }
       })
-      .catch(err => res.status(400).json({ error: err }));
+      .catch(err => res.status(400).json({ message: err.message }));
   } else {
-    res.status(400).json({
-      error: { message: "can't empty the record", name: 'ValidationError' }
-    });
+    return res
+      .status(400)
+      .json({ message: 'Provide the new value(s) for the field(s) to update' });
   }
 };
 
-export { createParcel, getAll, getParcel, cancelParcel, userParcels };
+export { createParcel, getAll, getParcel, updateParcel, userParcels };
