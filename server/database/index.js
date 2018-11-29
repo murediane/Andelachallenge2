@@ -1,4 +1,3 @@
-
 import Joi from 'joi';
 import { Pool } from 'pg';
 import dbConfig from '../config/db';
@@ -23,16 +22,29 @@ export default class Database {
     return this.pool.connect();
   }
 
-  createCond(args, operator = 'AND') {
+  // createCond(args, operator = 'AND') {
+  //   const argsKeys = Object.keys(args);
+  //   const values = [];
+  //   let keys = '';
+  //   argsKeys.map((key, index) => {
+  //     values.push(args[key]);
+  //     keys += `${key}=$${index + 1}`;
+  //     if (index !== argsKeys.length - 1) keys += ` ${operator} `;
+  //   });
+  //   return { keys, values };
+  // }
+
+  createCond(args, operator = 'AND', prevIndex = 0) {
     const argsKeys = Object.keys(args);
+    const lastIndex = argsKeys.length - 1;
     const values = [];
     let keys = '';
     argsKeys.map((key, index) => {
       values.push(args[key]);
-      keys += `${key}=$${index + 1}`;
-      if (index !== argsKeys.length - 1) keys += ` ${operator} `;
+      keys += `${key}=$${prevIndex + index + 1}`;
+      if (index !== lastIndex) keys += ` ${operator} `;
     });
-    return { keys, values };
+    return { keys, values, lastIndex: lastIndex + 1 };
   }
 
   // METHOD TO SAVE THE NEW INCOMING DATA
@@ -79,12 +91,16 @@ export default class Database {
     const { keys, values } = this.createCond(args);
     const condition = Object.keys(args).length ? ` WHERE ${keys}` : '';
     return new Promise((resolve, reject) => {
-      this.connect().then(client => {
-        client
-          .query(`SELECT * FROM ${this.table}${condition}`, values)
-          .then(data => resolve(data.rows))
-          .catch(err => reject(this.createError(err)));
-      });
+      this.connect()
+        .then(client => {
+          client
+            .query(`SELECT * FROM ${this.table}${condition}`, values)
+            .then(data => resolve(data.rows))
+            .catch(err => reject(this.createError(err)));
+        })
+        .catch(err => {
+          reject(this.createError(err));
+        });
     });
   }
 
@@ -93,7 +109,11 @@ export default class Database {
   findById(id) {
     return new Promise((resolve, reject) => {
       this.find({ id })
-        .then(res => resolve(res))
+        .then(res => {
+          res.length
+            ? resolve(res[0])
+            : reject({ message: ' Item not  found', name: 'QueryError' });
+        })
         .catch(err => reject(this.createError(err)));
     });
   }
@@ -153,6 +173,26 @@ export default class Database {
         .catch(err => reject(err));
     });
   }
+  update(args = {}, conditions = {}) {
+    const { keys, values, lastIndex } = this.createCond(args, ',');
+    const { keys: condKeys, values: condValues } = this.createCond(
+      conditions,
+      'AND',
+      lastIndex,
+    );
+    const condition = Object.keys(conditions).length ? `WHERE ${condKeys}` : '';
+    return new Promise((resolve, reject) => {
+      this.connect()
+        .then(client => {
+          client
+            .query(
+              `UPDATE ${this.table} SET ${keys} ${condition} returning*`,
+              values.concat(condValues),
+            )
+            .then(res => resolve(res.rows))
+            .catch(err => reject(this.createError(err)));
+        })
+        .catch(err => reject(this.createError(err)));
+    });
+  }
 }
-
-

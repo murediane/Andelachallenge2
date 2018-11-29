@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import {
   createParcel,
-  cancelParcel,
+  updateParcel,
   userParcels,
   getAll,
   getParcel,
@@ -25,7 +25,13 @@ router.post(`${entry}`, createParcel);
 
 //  CANCEL THE PARCEL
 
-router.put(`${entry}/:id/cancel`, cancelParcel);
+router.put(`${entry}/:id/cancel`, updateParcel);
+//CHANGE DESTINATION
+router.put(`${entry}/:id/destination`, updateParcel);
+// CHANGE  Status
+//router.put(`${entry}/:id/status`, updateParcel);
+//Change presentLocation
+//router.put(`${entry}/:id/presentLocation`, updateParcel);
 
 //  GET ALL USER PARCELS
 
