@@ -18,6 +18,7 @@ const createUser = (req, res) => {
       names,
       phone,
       email,
+      role,
       password
     })
       .then(user =>

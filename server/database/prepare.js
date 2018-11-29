@@ -7,14 +7,14 @@ const functions = [
   NEW.updatedat = now();
   RETURN NEW;
   END;
-  $$ language 'plpgsql';`,
+  $$ language 'plpgsql';`
 ];
 
 const triggers = [
   `CREATE TRIGGER user_timestamp BEFORE UPDATE
   ON users FOR EACH ROW EXECUTE PROCEDURE update_timestamp();`,
   `CREATE TRIGGER parcels_timestamp BEFORE UPDATE
-  ON parcels FOR EACH ROW EXECUTE PROCEDURE update_timestamp();`,
+  ON parcels FOR EACH ROW EXECUTE PROCEDURE update_timestamp();`
 ];
 const tables = [
   `CREATE TABLE IF NOT EXISTS users(
@@ -23,6 +23,7 @@ const tables = [
     phone VARCHAR(15) NOT NULL,
     email VARCHAR(50) NOT NULL,
     password VARCHAR(200),
+    role VARCHAR(200),
     createdat timestamp NOT NULL DEFAULT now(),
     updatedat timestamp NOT NULL DEFAULT now(),
     UNIQUE(email,phone)
@@ -41,7 +42,7 @@ const tables = [
     status VARCHAR(20) NOT NULL,
     createdat timestamp NOT NULL DEFAULT now(),
     updatedat timestamp NOT NULL DEFAULT now()
-)`,
+)`
 ];
 
 const database = new Database(null, null);
@@ -57,9 +58,9 @@ const database = new Database(null, null);
             console.log(
               `Function "${funcQuery.slice(
                 funcQuery.indexOf('ON') + 3,
-                funcQuery.indexOf('('),
-              )}" ${res.command}D`,
-            ),
+                funcQuery.indexOf('(')
+              )}" ${res.command}D`
+            )
           )
           .catch(err => console.log(err));
       });
@@ -70,11 +71,11 @@ const database = new Database(null, null);
           .query(
             `DROP TRIGGER IF EXISTS ${trigQuery.slice(
               15,
-              trigQuery.indexOf('BEFORE') - 1,
+              trigQuery.indexOf('BEFORE') - 1
             )} ${trigQuery.slice(
               trigQuery.indexOf('ON'),
-              trigQuery.indexOf('FOR EACH') - 1,
-            )}`,
+              trigQuery.indexOf('FOR EACH') - 1
+            )}`
           )
           .then(async () => {
             await client
@@ -83,9 +84,9 @@ const database = new Database(null, null);
                 console.log(
                   `Trigger "${trigQuery.slice(
                     trigQuery.indexOf('GER') + 3,
-                    trigQuery.indexOf('BEFORE') - 1,
-                  )}" ${res.command}D`,
-                ),
+                    trigQuery.indexOf('BEFORE') - 1
+                  )}" ${res.command}D`
+                )
               )
               .catch(err => console.log(err));
           })
@@ -100,9 +101,9 @@ const database = new Database(null, null);
             console.log(
               `Table "${tableQuery.slice(
                 tableQuery.indexOf('TS') + 3,
-                tableQuery.indexOf('('),
-              )}" ${res.command}D`,
-            ),
+                tableQuery.indexOf('(')
+              )}" ${res.command}D`
+            )
           )
           .catch(err => console.log(err));
       });
