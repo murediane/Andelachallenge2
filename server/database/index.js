@@ -1,10 +1,13 @@
 import Joi from 'joi';
 import { Pool } from 'pg';
-import dbConfig from '../config/db';
+// import bcrypt from 'bcrypt';
+
+import database from '../config/db';
 
 export default class Database {
-  constructor(schema, tableName, configs = dbConfig.dev) {
-    this.pool = new Pool(configs);
+  constructor(schema, tableName) {
+    const { databaseUrl: connectionString } = database;
+    this.pool = new Pool({ connectionString });
     this.table = tableName;
     this.schema = schema;
   }
@@ -21,18 +24,6 @@ export default class Database {
   connect() {
     return this.pool.connect();
   }
-
-  // createCond(args, operator = 'AND') {
-  //   const argsKeys = Object.keys(args);
-  //   const values = [];
-  //   let keys = '';
-  //   argsKeys.map((key, index) => {
-  //     values.push(args[key]);
-  //     keys += `${key}=$${index + 1}`;
-  //     if (index !== argsKeys.length - 1) keys += ` ${operator} `;
-  //   });
-  //   return { keys, values };
-  // }
 
   createCond(args, operator = 'AND', prevIndex = 0) {
     const argsKeys = Object.keys(args);

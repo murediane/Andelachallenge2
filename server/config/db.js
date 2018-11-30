@@ -1,27 +1,10 @@
 import dotEnv from 'dotenv';
 
 dotEnv.config();
-
-export default {
-  dev: {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.USER_PASSWORD,
-    port: process.env.DB_PORT
-  },
-  test: {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.USER_PASSWORD,
-    port: process.env.DB_PORT
-  },
-  production: {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.USER_PASSWORD,
-    port: process.env.DB_PORT
-  }
+const dbEnv = {
+  development: process.env.DATABASE_URL_DEV,
+  test: process.env.DATABASE_URL_TEST,
+  production: process.env.DATABASE_URL
 };
+
+export default { databaseUrl: dbEnv[process.env.NODE_ENV], dbEnv };
