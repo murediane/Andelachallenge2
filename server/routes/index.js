@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 // import all of your routes from their files
 import parcelRoutes from './parcels';
 import userRoutes from './authentication';
+import Helpers from '../helpers';
 
 const routes = Router();
 
@@ -18,6 +19,7 @@ const uploads = ('/uploads', express.static('uploads'));
 
 //ALL ENDPOINTS
 
-routes.use(entryPoint, parcelRoutes, userRoutes, uploads);
+routes.use(entryPoint, userRoutes);
+routes.use(Helpers.checkAuth, parcelRoutes);
 
 export default routes;
