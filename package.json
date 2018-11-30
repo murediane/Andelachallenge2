@@ -7,14 +7,12 @@
   "license": "MIT",
   "scripts": {
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-
     "db": "node --require babel-register ./server/database/prepare.js --exit ",
-    "test": "nyc --reporter=text --reporter=lcov mocha --timeout 25000 --require babel-register {tests,tests/**}/*.spec.js --exit",
-    "server": "nodemon --exec babel-node ./server/index.js"
+    "test": "nyc --reporter=text --reporter=lcov mocha --timeout 25000 --require babel-register {tests,tests/**}/*.test.js --exit",
+    "server": "SET NODE_ENV=development && nodemon --exec babel-node ./server/index.js"
   },
   "engines": {
     "node": "8.12.0"
-
   },
   "repository": {
     "type": "git",
