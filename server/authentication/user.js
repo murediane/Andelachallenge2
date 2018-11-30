@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-
 import User from '../models/User';
+import Helpers from '../helpers';
 
 // CREATE THE USER
 
@@ -20,10 +20,12 @@ const createUser = (req, res) => {
       password
     })
       .then(user => {
-        const token = jwt.sign({ ...user.email }, process.env.JWT_KEY, {
-          expiresIn: '1h'
-        });
-        return res.status(201).send({ token, id: user.id });
+        const token = Helpers.createToken(
+          { ...user.email, ...user.id },
+          { expiresIn: '1h' }
+        );
+
+        return res.status(201).send({ token, message: 'token has been created' });
       })
       .catch(error => res.status(400).send({ error }));
   });
@@ -38,11 +40,11 @@ const login = (req, res) => {
       bcrypt.compare(pass, users[0].password, (err, same) => {
         if (same === true) {
           return res.status(200).json({
-            error: null,
-            token: jwt.sign({ ...users[0].email }, process.env.JWT_KEY, {
-              expiresIn: '1h'
-            }),
-            id: users[0].id
+            token: Helpers.checkAuth(
+              { ...users[0].email, ...users[0].id },
+              process.env.JWT_KEY,
+              { expiresIn: '1h' }
+            )
           });
         }
         return res.status(401).json({
